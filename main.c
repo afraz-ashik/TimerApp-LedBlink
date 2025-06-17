@@ -1,17 +1,16 @@
 //**************************** Print Statement ********************************
+
 // Copyright (c) 2025 Trenser Technology Solutions
 // All Rights Reserved
 //*****************************************************************************
-//
 // File    : main.c
 // Summary : Prints "Hello World!"
 // Note    : None
 // Author  : Afraz Ashik
 // Date    : 16/06/25
-//
 //*****************************************************************************
-//******************************* Include Files *******************************
 
+//******************************* Include Files *******************************
 #include<stdio.h>
 
 //******************************* Local Types *********************************
@@ -23,16 +22,17 @@
 //****************************** Local Functions ******************************
 
 //******************************.mainFunction.*********************************
-// Purpose : To print "Hello Wolrd!".
+// Purpose : To print "Hello World!"
 // Inputs  : None
 // Outputs : None
-// Return  : None
-// Notes   : None.
+// Return  : Zero
+// Notes   : None
 //*****************************************************************************
-
 int main()
 {   
     printf("Hello world!");
+
+    return 0;
 }
 
 //EOF
