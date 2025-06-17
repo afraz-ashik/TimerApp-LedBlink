@@ -24,8 +24,8 @@
 // Purpose : To print "Hello World!"
 // Inputs  : None
 // Outputs : None
-// Return  : None
-// Notes   : None.
+// Return  : Zero
+// Notes   : None
 //*****************************************************************************
 int main()
 {   
