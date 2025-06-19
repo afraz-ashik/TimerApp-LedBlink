@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include "appTimer.h"
 #include <string.h>
-#include <..\common.h>
+#include <../common.h>
 
 //******************************* Local Types *********************************
 
