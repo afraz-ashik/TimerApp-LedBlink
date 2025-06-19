@@ -11,7 +11,8 @@
 //******************************* Include Files *******************************
 #include <stdio.h>
 #include "appTimer.h"
-#include<string.h>
+#include <string.h>
+#include <..\common.h>
 
 //******************************* Local Types *********************************
 
@@ -26,7 +27,7 @@
 //******************************.AppTimerUTC.**********************************
 // Purpose : Prints current time in GMT timezone.
 // Inputs  : EpochTime - number of seconds since beginning of 1970
-// Outputs : Time in GMT timezone
+// Outputs : None
 // Return  : False if EpochTime is zero.
 // Return  : True
 // Notes   : None
@@ -46,7 +47,7 @@ bool AppTimerUTC(time_t EpochTime)
     uint16 unSeconds;
     uint16 unIterator;
     uint16 unMonth;
-    uint32 ulDay;
+    uint32 unDay;
     uint8 ucMeridium[MERIDIUM_SIZE];
     uint16 unDaysinMonths[]={DAYS_IN_JANUARY,DAYS_IN_FEBRUARY,DAYS_IN_MARCH,
     DAYS_IN_APRIL,DAYS_IN_MAY,DAYS_IN_JUNE,DAYS_IN_JULY,DAYS_IN_AUGUST,
@@ -94,7 +95,7 @@ bool AppTimerUTC(time_t EpochTime)
         }
 
         unMonth = unIterator+INCREMENT_ONE;
-        ulDay = ulTotalDays;
+        unDay = ulTotalDays;
     }
     
     if (PM_CHECK <= unHours)
@@ -119,7 +120,7 @@ bool AppTimerUTC(time_t EpochTime)
     printf("--------------------\n");
     printf("TIME  : %02hu:%02hu:%02hu %s\n",
         unHours,unMinutes,unSeconds,ucMeridium);
-    printf("DATE  : %02hu/%02hu/%ld\n",++ulDay,++unMonth,ulYear);
+    printf("DATE  : %02hu/%02hu/%lu\n",++unDay,++unMonth,ulYear);
     printf("Epoch : %d\n",CurrentEpoch);
 
     return true;
@@ -128,7 +129,7 @@ bool AppTimerUTC(time_t EpochTime)
 //******************************.AppTimerIST.**********************************
 // Purpose : Prints current time in IST timezone.
 // Inputs  : EpochTime - number of seconds since beginning of 1970
-// Outputs : Time in IST timezone
+// Outputs : None
 // Return  : False if EpochTime is zero.
 // Return  : True
 // Notes   : None
@@ -147,7 +148,7 @@ bool AppTimerIST(time_t EpochTime)
     uint16 unSeconds;
     uint16 unIterator;
     uint16 unMonth;
-    uint32 ulDay;
+    uint32 unDay;
     uint8 ucMeridium[MERIDIUM_SIZE];
     uint16 unDaysinMonths[]={DAYS_IN_JANUARY,DAYS_IN_FEBRUARY,DAYS_IN_MARCH,
     DAYS_IN_APRIL,DAYS_IN_MAY,DAYS_IN_JUNE,DAYS_IN_JULY,DAYS_IN_AUGUST,
@@ -195,7 +196,7 @@ bool AppTimerIST(time_t EpochTime)
         }
 
         unMonth = unIterator+INCREMENT_ONE;
-        ulDay = ulTotalDays;
+        unDay = ulTotalDays;
     }
     
     if (PM_CHECK <= unHours)
@@ -219,7 +220,7 @@ bool AppTimerIST(time_t EpochTime)
     printf("--------------------\n");
     printf("TIME  : %02hu:%02hu:%02hu %s\n",
         unHours,unMinutes,unSeconds,ucMeridium);
-    printf("DATE  : %02hu/%02hu/%ld\n",++ulDay,++unMonth,ulYear);
+    printf("DATE  : %02hu/%02hu/%lu\n",++unDay,++unMonth,ulYear);
 
     return true;
 }
@@ -227,7 +228,7 @@ bool AppTimerIST(time_t EpochTime)
 //******************************.AppTimerPST.**********************************
 // Purpose : Prints current time in PST timezone.
 // Inputs  : EpochTime - number of seconds since beginning of 1970
-// Outputs : Time in PST timezone
+// Outputs : None
 // Return  : False if EpochTime is zero.
 // Return  : True
 // Notes   : None
@@ -246,7 +247,7 @@ bool AppTimerPST(time_t EpochTime)
     uint16 unSeconds;
     uint16 unIterator;
     uint16 unMonth;
-    uint32 ulDay;
+    uint16 unDay;
     uint8 ucMeridium[MERIDIUM_SIZE];
     uint16 unDaysinMonths[]={DAYS_IN_JANUARY,DAYS_IN_FEBRUARY,DAYS_IN_MARCH,
     DAYS_IN_APRIL,DAYS_IN_MAY,DAYS_IN_JUNE,DAYS_IN_JULY,DAYS_IN_AUGUST,
@@ -295,7 +296,7 @@ bool AppTimerPST(time_t EpochTime)
         }
 
         unMonth = unIterator+INCREMENT_ONE;
-        ulDay = ulTotalDays;
+        unDay = ulTotalDays;
     }
     
     if (PM_CHECK <= unHours)
@@ -320,7 +321,7 @@ bool AppTimerPST(time_t EpochTime)
     printf("--------------------\n");
     printf("TIME  : %02hu:%02hu:%02hu %s\n",
         unHours,unMinutes,unSeconds,ucMeridium);
-    printf("DATE  : %02hu/%02hu/%ld\n",++ulDay,++unMonth,ulYear);
+    printf("DATE  : %02hu/%02hu/%lu\n",++unDay,++unMonth,ulYear);
 
     return true;
 }

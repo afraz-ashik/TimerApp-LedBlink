@@ -3,7 +3,7 @@
 // All Rights Reserved 
 //***************************************************************************** 
 //
-// Summary : Typedefs, macros and forward declarations included
+// Summary : Macros and forwards decalrations are included
 // Note    : None
 // 
 //***************************************************************************** 
@@ -11,15 +11,11 @@
 #define _APP_TIMER_H_
 
 //******************************* Include Files ******************************* 
-#include<stdio.h>
-#include<stdbool.h>
-#include<time.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include <time.h>
 
 //******************************* Global Types ******************************** 
-typedef unsigned long uint32;
-typedef unsigned short uint16;
-typedef unsigned char uint8;
-
 
 //***************************** Global Constants ****************************** 
 #define BUFFER_SIZE             (20)
