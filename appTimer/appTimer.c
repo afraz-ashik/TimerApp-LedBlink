@@ -46,7 +46,7 @@ bool AppTimerUTC(time_t EpochTime)
     uint16 unSeconds;
     uint16 unIterator;
     uint16 unMonth;
-    uint32 unDay;
+    uint32 ulDay;
     uint8 ucMeridium[MERIDIUM_SIZE];
     uint16 unDaysinMonths[]={DAYS_IN_JANUARY,DAYS_IN_FEBRUARY,DAYS_IN_MARCH,
     DAYS_IN_APRIL,DAYS_IN_MAY,DAYS_IN_JUNE,DAYS_IN_JULY,DAYS_IN_AUGUST,
@@ -94,7 +94,7 @@ bool AppTimerUTC(time_t EpochTime)
         }
 
         unMonth = unIterator+INCREMENT_ONE;
-        unDay = ulTotalDays;
+        ulDay = ulTotalDays;
     }
     
     if (PM_CHECK <= unHours)
@@ -119,7 +119,7 @@ bool AppTimerUTC(time_t EpochTime)
     printf("--------------------\n");
     printf("TIME  : %02hu:%02hu:%02hu %s\n",
         unHours,unMinutes,unSeconds,ucMeridium);
-    printf("DATE  : %02hu/%02hu/%ld\n",++unDay,++unMonth,ulYear);
+    printf("DATE  : %02hu/%02hu/%ld\n",++ulDay,++unMonth,ulYear);
     printf("Epoch : %d\n",CurrentEpoch);
 
     return true;
@@ -147,7 +147,7 @@ bool AppTimerIST(time_t EpochTime)
     uint16 unSeconds;
     uint16 unIterator;
     uint16 unMonth;
-    uint32 unDay;
+    uint32 ulDay;
     uint8 ucMeridium[MERIDIUM_SIZE];
     uint16 unDaysinMonths[]={DAYS_IN_JANUARY,DAYS_IN_FEBRUARY,DAYS_IN_MARCH,
     DAYS_IN_APRIL,DAYS_IN_MAY,DAYS_IN_JUNE,DAYS_IN_JULY,DAYS_IN_AUGUST,
@@ -195,7 +195,7 @@ bool AppTimerIST(time_t EpochTime)
         }
 
         unMonth = unIterator+INCREMENT_ONE;
-        unDay = ulTotalDays;
+        ulDay = ulTotalDays;
     }
     
     if (PM_CHECK <= unHours)
@@ -219,7 +219,7 @@ bool AppTimerIST(time_t EpochTime)
     printf("--------------------\n");
     printf("TIME  : %02hu:%02hu:%02hu %s\n",
         unHours,unMinutes,unSeconds,ucMeridium);
-    printf("DATE  : %02hu/%02hu/%ld\n",++unDay,++unMonth,ulYear);
+    printf("DATE  : %02hu/%02hu/%ld\n",++ulDay,++unMonth,ulYear);
 
     return true;
 }
@@ -246,7 +246,7 @@ bool AppTimerPST(time_t EpochTime)
     uint16 unSeconds;
     uint16 unIterator;
     uint16 unMonth;
-    uint32 unDay;
+    uint32 ulDay;
     uint8 ucMeridium[MERIDIUM_SIZE];
     uint16 unDaysinMonths[]={DAYS_IN_JANUARY,DAYS_IN_FEBRUARY,DAYS_IN_MARCH,
     DAYS_IN_APRIL,DAYS_IN_MAY,DAYS_IN_JUNE,DAYS_IN_JULY,DAYS_IN_AUGUST,
@@ -295,7 +295,7 @@ bool AppTimerPST(time_t EpochTime)
         }
 
         unMonth = unIterator+INCREMENT_ONE;
-        unDay = ulTotalDays;
+        ulDay = ulTotalDays;
     }
     
     if (PM_CHECK <= unHours)
@@ -320,7 +320,7 @@ bool AppTimerPST(time_t EpochTime)
     printf("--------------------\n");
     printf("TIME  : %02hu:%02hu:%02hu %s\n",
         unHours,unMinutes,unSeconds,ucMeridium);
-    printf("DATE  : %02hu/%02hu/%ld\n",++unDay,++unMonth,ulYear);
+    printf("DATE  : %02hu/%02hu/%ld\n",++ulDay,++unMonth,ulYear);
 
     return true;
 }
