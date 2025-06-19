@@ -1,1 +1,5 @@
+#Executables
 *.exe
+#Build files
+*.s
+*.o
