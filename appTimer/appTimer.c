@@ -41,13 +41,13 @@ bool AppTimerUTC(time_t EpochTime)
     time_t CurrentEpoch = EpochTime;
     uint16 unMinutes;
     uint16 unHours;
-    uint32 unTotalDays;
+    uint32 ulTotalDays;
     uint32 ulYear;
     uint16 unSeconds;
     uint16 unIterator;
     uint16 unMonth;
     uint32 unDay;
-    uint8 cMeridium[MERIDIUM_SIZE];
+    uint8 ucMeridium[MERIDIUM_SIZE];
     uint16 unDaysinMonths[]={DAYS_IN_JANUARY,DAYS_IN_FEBRUARY,DAYS_IN_MARCH,
     DAYS_IN_APRIL,DAYS_IN_MAY,DAYS_IN_JUNE,DAYS_IN_JULY,DAYS_IN_AUGUST,
     DAYS_IN_SEPTEMBER,DAYS_IN_OCTOBER,DAYS_IN_NOVEMBER,DAYS_IN_DECEMBER};
@@ -59,7 +59,7 @@ bool AppTimerUTC(time_t EpochTime)
     EpochTime /= MINUTES;
 
     unHours= EpochTime % HOURS_IN_A_DAY; // Current Hour
-    unTotalDays= EpochTime / HOURS_IN_A_DAY; // Remaining #days
+    ulTotalDays= EpochTime / HOURS_IN_A_DAY; // Remaining #days
     EpochTime /= HOURS_IN_A_DAY;
     ulYear= (EpochTime / DAYS_IN_A_YEAR) + INITIAL_YEAR; // Curr_year
     
@@ -69,37 +69,37 @@ bool AppTimerUTC(time_t EpochTime)
             (ZERO != (unIterator % LEAP_YEAR_CHECK_ONE) ||
              ZERO == (unIterator % LEAP_YEAR_CHECK_TWO)))
         {
-            unTotalDays -= DAYS_IN_LEAP_YEAR;
+            ulTotalDays -= DAYS_IN_LEAP_YEAR;
         }
         else
         {
-            unTotalDays -= DAYS_IN_A_YEAR;
+            ulTotalDays -= DAYS_IN_A_YEAR;
         }
         
     }
 
     for (unIterator = ZERO; unIterator < NUMBER_OF_MONTHS; unIterator++)
     {
-        if (MINIMUM_DAYS_IN_MONTH>=unTotalDays)
+        if (MINIMUM_DAYS_IN_MONTH>=ulTotalDays)
         {
             break;
         }
         
-        unTotalDays -= unDaysinMonths[unIterator];
+        ulTotalDays -= unDaysinMonths[unIterator];
         if (FEBRUARY == unIterator && (ZERO == ulYear % LEAP_YEAR_GAP && 
             (ZERO != (ulYear % LEAP_YEAR_CHECK_ONE) ||
             ZERO == (ulYear % LEAP_YEAR_CHECK_TWO))))
         {
-            unTotalDays--;
+            ulTotalDays--;
         }
 
         unMonth = unIterator+INCREMENT_ONE;
-        unDay = unTotalDays;
+        unDay = ulTotalDays;
     }
     
     if (PM_CHECK <= unHours)
     {
-        strcpy(cMeridium,"PM");
+        strcpy(ucMeridium,"PM");
         if (PM_CHECK < unHours)
         {
             unHours -= MERIDIUM_FACTOR;
@@ -107,7 +107,7 @@ bool AppTimerUTC(time_t EpochTime)
     }
     else
     {
-        strcpy(cMeridium,"AM");
+        strcpy(ucMeridium,"AM");
         if (AM_CHECK == unHours)
         {
             unHours += MERIDIUM_FACTOR;
@@ -118,7 +118,7 @@ bool AppTimerUTC(time_t EpochTime)
     printf("UTC (0:00)\n");
     printf("--------------------\n");
     printf("TIME  : %02hu:%02hu:%02hu %s\n",
-        unHours,unMinutes,unSeconds,cMeridium);
+        unHours,unMinutes,unSeconds,ucMeridium);
     printf("DATE  : %02hu/%02hu/%ld\n",++unDay,++unMonth,ulYear);
     printf("Epoch : %d\n",CurrentEpoch);
 
@@ -142,13 +142,13 @@ bool AppTimerIST(time_t EpochTime)
 
     uint16 unMinutes;
     uint16 unHours;
-    uint32 unTotalDays;
+    uint32 ulTotalDays;
     uint32 ulYear;
     uint16 unSeconds;
     uint16 unIterator;
     uint16 unMonth;
     uint32 unDay;
-    uint8 cMeridium[MERIDIUM_SIZE];
+    uint8 ucMeridium[MERIDIUM_SIZE];
     uint16 unDaysinMonths[]={DAYS_IN_JANUARY,DAYS_IN_FEBRUARY,DAYS_IN_MARCH,
     DAYS_IN_APRIL,DAYS_IN_MAY,DAYS_IN_JUNE,DAYS_IN_JULY,DAYS_IN_AUGUST,
     DAYS_IN_SEPTEMBER,DAYS_IN_OCTOBER,DAYS_IN_NOVEMBER,DAYS_IN_DECEMBER};
@@ -161,7 +161,7 @@ bool AppTimerIST(time_t EpochTime)
     EpochTime /= MINUTES;
 
     unHours= EpochTime % HOURS_IN_A_DAY; // Current Hour
-    unTotalDays= EpochTime / HOURS_IN_A_DAY; // Remaining #days
+    ulTotalDays= EpochTime / HOURS_IN_A_DAY; // Remaining #days
     EpochTime /= HOURS_IN_A_DAY;
     ulYear= (EpochTime / DAYS_IN_A_YEAR) + INITIAL_YEAR; // Curr_year
     
@@ -171,36 +171,36 @@ bool AppTimerIST(time_t EpochTime)
             (ZERO != (unIterator % LEAP_YEAR_CHECK_ONE) ||
              ZERO == (unIterator % LEAP_YEAR_CHECK_TWO)))
         {
-            unTotalDays -= DAYS_IN_LEAP_YEAR;
+            ulTotalDays -= DAYS_IN_LEAP_YEAR;
         }
         else
         {
-            unTotalDays -= DAYS_IN_A_YEAR;
+            ulTotalDays -= DAYS_IN_A_YEAR;
         }
     }
 
     for (unIterator = ZERO; unIterator < NUMBER_OF_MONTHS; unIterator++)
     {
-        if (MINIMUM_DAYS_IN_MONTH>=unTotalDays)
+        if (MINIMUM_DAYS_IN_MONTH>=ulTotalDays)
         {
             break;
         }
         
-        unTotalDays -= unDaysinMonths[unIterator];
+        ulTotalDays -= unDaysinMonths[unIterator];
         if (FEBRUARY == unIterator && (ZERO == ulYear % LEAP_YEAR_GAP && 
             (ZERO != (ulYear % LEAP_YEAR_CHECK_ONE) ||
             ZERO == (ulYear % LEAP_YEAR_CHECK_TWO))))
         {
-            unTotalDays--;
+            ulTotalDays--;
         }
 
         unMonth = unIterator+INCREMENT_ONE;
-        unDay = unTotalDays;
+        unDay = ulTotalDays;
     }
     
     if (PM_CHECK <= unHours)
     {
-        strcpy(cMeridium,"PM");
+        strcpy(ucMeridium,"PM");
         if (PM_CHECK < unHours)
         {
             unHours -= MERIDIUM_FACTOR;
@@ -208,7 +208,7 @@ bool AppTimerIST(time_t EpochTime)
     }
     else
     {
-        strcpy(cMeridium,"AM");
+        strcpy(ucMeridium,"AM");
         if (AM_CHECK == unHours)
         {
             unHours += MERIDIUM_FACTOR;
@@ -218,7 +218,7 @@ bool AppTimerIST(time_t EpochTime)
     printf("\nIST (+5:30)\n");
     printf("--------------------\n");
     printf("TIME  : %02hu:%02hu:%02hu %s\n",
-        unHours,unMinutes,unSeconds,cMeridium);
+        unHours,unMinutes,unSeconds,ucMeridium);
     printf("DATE  : %02hu/%02hu/%ld\n",++unDay,++unMonth,ulYear);
 
     return true;
@@ -241,13 +241,13 @@ bool AppTimerPST(time_t EpochTime)
 
     uint16 unMinutes;
     uint16 unHours;
-    uint32 unTotalDays;
+    uint32 ulTotalDays;
     uint32 ulYear;
     uint16 unSeconds;
     uint16 unIterator;
     uint16 unMonth;
     uint32 unDay;
-    uint8 cMeridium[MERIDIUM_SIZE];
+    uint8 ucMeridium[MERIDIUM_SIZE];
     uint16 unDaysinMonths[]={DAYS_IN_JANUARY,DAYS_IN_FEBRUARY,DAYS_IN_MARCH,
     DAYS_IN_APRIL,DAYS_IN_MAY,DAYS_IN_JUNE,DAYS_IN_JULY,DAYS_IN_AUGUST,
     DAYS_IN_SEPTEMBER,DAYS_IN_OCTOBER,DAYS_IN_NOVEMBER,DAYS_IN_DECEMBER};
@@ -260,7 +260,7 @@ bool AppTimerPST(time_t EpochTime)
     EpochTime /= MINUTES;
 
     unHours= EpochTime % HOURS_IN_A_DAY; // Current Hour
-    unTotalDays= EpochTime / HOURS_IN_A_DAY; // Remaining #days
+    ulTotalDays= EpochTime / HOURS_IN_A_DAY; // Remaining #days
     EpochTime /= HOURS_IN_A_DAY;
     ulYear= (EpochTime / DAYS_IN_A_YEAR) + INITIAL_YEAR; // Curr_year
     
@@ -270,37 +270,37 @@ bool AppTimerPST(time_t EpochTime)
             (ZERO != (unIterator % LEAP_YEAR_CHECK_ONE) ||
              ZERO == (unIterator % LEAP_YEAR_CHECK_TWO)))
         {
-            unTotalDays -= DAYS_IN_LEAP_YEAR;
+            ulTotalDays -= DAYS_IN_LEAP_YEAR;
         }
         else
         {
-            unTotalDays -= DAYS_IN_A_YEAR;
+            ulTotalDays -= DAYS_IN_A_YEAR;
         }
         
     }
 
     for (unIterator = ZERO; unIterator < NUMBER_OF_MONTHS; unIterator++)
     {
-        if (MINIMUM_DAYS_IN_MONTH>=unTotalDays)
+        if (MINIMUM_DAYS_IN_MONTH>=ulTotalDays)
         {
             break;
         }
         
-        unTotalDays -= unDaysinMonths[unIterator];
+        ulTotalDays -= unDaysinMonths[unIterator];
         if (FEBRUARY == unIterator && (ZERO == ulYear % LEAP_YEAR_GAP && 
             (ZERO != (ulYear % LEAP_YEAR_CHECK_ONE) ||
             ZERO == (ulYear % LEAP_YEAR_CHECK_TWO))))
         {
-            unTotalDays--;
+            ulTotalDays--;
         }
 
         unMonth = unIterator+INCREMENT_ONE;
-        unDay = unTotalDays;
+        unDay = ulTotalDays;
     }
     
     if (PM_CHECK <= unHours)
     {
-        strcpy(cMeridium,"PM");
+        strcpy(ucMeridium,"PM");
         if (PM_CHECK < unHours)
         {
             unHours -= PM_CHECK;
@@ -308,7 +308,7 @@ bool AppTimerPST(time_t EpochTime)
     }
     else
     {
-        strcpy(cMeridium,"AM");
+        strcpy(ucMeridium,"AM");
         if (AM_CHECK == unHours)
         {
             unHours += MERIDIUM_FACTOR;
@@ -319,7 +319,7 @@ bool AppTimerPST(time_t EpochTime)
     printf("\nPST (-8:00)\n");
     printf("--------------------\n");
     printf("TIME  : %02hu:%02hu:%02hu %s\n",
-        unHours,unMinutes,unSeconds,cMeridium);
+        unHours,unMinutes,unSeconds,ucMeridium);
     printf("DATE  : %02hu/%02hu/%ld\n",++unDay,++unMonth,ulYear);
 
     return true;
