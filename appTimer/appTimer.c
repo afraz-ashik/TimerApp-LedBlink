@@ -47,7 +47,7 @@ bool AppTimerUTC(time_t EpochTime)
     uint16 unSeconds;
     uint16 unIterator;
     uint16 unMonth;
-    uint32 unDay;
+    uint16 unDay;
     uint8 ucMeridium[MERIDIUM_SIZE];
     uint16 unDaysinMonths[]={DAYS_IN_JANUARY,DAYS_IN_FEBRUARY,DAYS_IN_MARCH,
     DAYS_IN_APRIL,DAYS_IN_MAY,DAYS_IN_JUNE,DAYS_IN_JULY,DAYS_IN_AUGUST,
