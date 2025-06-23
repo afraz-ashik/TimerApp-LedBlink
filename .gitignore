@@ -3,3 +3,7 @@
 #Build files
 *.s
 *.o
+#folder
+*.vscode
+#text file
+*.txt
