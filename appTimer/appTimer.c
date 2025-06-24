@@ -79,6 +79,7 @@ bool AppTimerConvertToTime(time_t ulEpochTime)
             // If current year is leap year
             if (unIdx == ulYear) 
             {
+                // Check if Current month is january or february
                 if (JAN_OR_FEB_DATE_FLAG >= ulTotalDays)
                 {
                     break;
@@ -150,6 +151,7 @@ bool AppTimerConvertToTime(time_t ulEpochTime)
     if (PM_CHECK <= unHours)
     {
         strcpy((char*) ucMeridium,"PM");
+
         if (PM_CHECK < unHours)
         {
             // Update railway time
