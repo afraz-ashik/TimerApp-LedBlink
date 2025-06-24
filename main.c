@@ -6,7 +6,7 @@
 // Summary : Printing current time in GMT, IST and PST timezone.
 // Note    : None
 // Author  : Afraz Ashik
-// Date    : 16/06/25
+// Date    : 18/JUNE/25
 //*****************************************************************************
 
 //******************************* Include Files *******************************
@@ -30,7 +30,7 @@
 //*****************************************************************************
 int main()
 {
-    time_t ulCurrentTime = ZERO;
+    time_t ulCurrentTime = 0;
 
     while(true)
     {
@@ -51,27 +51,27 @@ int main()
 
         printf("\nIST (+5:30)\n");
 
-        if(AppTimerConvertToTime(ulCurrentTime + IST_DIFFERENCE))// IST time
+        if(!AppTimerConvertToTime(ulCurrentTime + IST_DIFFERENCE))// IST time
         {
-            // Default case
+            printf("\nInvalid Epoch\n");
         }
         else
         {
-            printf("\nInvalid Epoch\n");
+            // Default case
         }
 
         printf("\nPST (-8:00)\n");
 
-        if(AppTimerConvertToTime(ulCurrentTime - PST_DIFFERENCE))// PST time
-        {
-            // Default case
-        }
-        else
+        if(!AppTimerConvertToTime(ulCurrentTime - PST_DIFFERENCE))// PST time
         {
             printf("\nInvalid Epoch\n");
         }
+        else
+        {
+            // Default case
+        }
 
-        sleep(ONE_SECOND); // Wait one second for refreshing time
+        sleep(1); // Wait one second for refreshing time
     }
 
     return 0;

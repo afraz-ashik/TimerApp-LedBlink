@@ -21,7 +21,6 @@
 #define ZERO                            (0)
 #define IS_EVEN(unNum)                  ((unNum % 2) == 0)
 #define MONTH_START                     (1)
-#define ONE_SECOND                      (1)
 #define INCREMENT_ONE                   (1)
 #define SECONDS                         (60)
 #define SECONDS_IN_A_MINUTE             (60)

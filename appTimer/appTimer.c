@@ -28,20 +28,20 @@
 // Purpose : Convert Epoch time to Standard time .
 // Inputs  : ulEpochTime - number of seconds since beginning of 1970
 // Outputs : None
-// Return  : blResult - False if ulEpochTime is zero, else true.
+// Return  : blResult - false if ulEpochTime is zero, else true.
 // Notes   : None
 //*****************************************************************************
 bool AppTimerConvertToTime(time_t ulEpochTime)
 {
     bool blResult = true; // Return variable
-    uint16 unMinutes = ZERO;
-    uint16 unHours = ZERO;
-    uint32 ulTotalDays = ZERO;
-    uint32 ulYear = ZERO;
-    uint16 unSeconds = ZERO;
-    uint16 unIdx = ZERO;
-    uint16 unMonth = ZERO;
-    uint16 unDay = ZERO;
+    uint16 unMinutes = 0;
+    uint16 unHours   = 0;
+    uint16 unSeconds = 0;
+    uint32 ulTotalDays = 0;
+    uint16 unMonth = 0;
+    uint16 unDay = 0;
+    uint32 ulYear = 0;
+    uint16 unIdx = 0;
     uint8 ucMeridium[MERIDIUM_SIZE] = "AM";
 
     if (ZERO == ulEpochTime)
@@ -106,7 +106,6 @@ bool AppTimerConvertToTime(time_t ulEpochTime)
             {
                 ulTotalDays -= MAX_DAYS_IN_A_MONTH;
             }
-            
         }
         if (FIRST_PART_OF_THE_YEAR < unIdx)
         {
@@ -119,9 +118,9 @@ bool AppTimerConvertToTime(time_t ulEpochTime)
                 ulTotalDays -= MIN_DAYS_IN_A_MONTH;
             }
             
-        } 
+        }
     }
-    unMonth = unIdx; // Add 1 to index to get Current month
+    unMonth = unIdx; // Store Current month
     unDay = ulTotalDays + INCREMENT_ONE; // Add 1 to remaining days - Curr_Day
 
     if (PM_CHECK <= unHours)
