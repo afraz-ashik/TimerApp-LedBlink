@@ -20,7 +20,7 @@
 //***************************** Global Constants ******************************
 #define ZERO                            (0)
 #define IS_EVEN(unNum)                  ((unNum % 2) == 0)
-#define JAN_OR_FEB_DATE_FLAG            (59)
+#define JAN_OR_FEB_DATE_FLAG            (58)
 #define MONTH_START                     (1)
 #define INITIAL_DAY                     (1)
 #define SECONDS                         (60)
