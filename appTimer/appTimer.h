@@ -20,8 +20,9 @@
 //***************************** Global Constants ******************************
 #define ZERO                            (0)
 #define IS_EVEN(unNum)                  ((unNum % 2) == 0)
+#define JAN_OR_FEB_DATE_FLAG            (59)
 #define MONTH_START                     (1)
-#define INCREMENT_ONE                   (1)
+#define INITIAL_DAY                     (1)
 #define SECONDS                         (60)
 #define SECONDS_IN_A_MINUTE             (60)
 #define HOURS_IN_A_DAY                  (24)

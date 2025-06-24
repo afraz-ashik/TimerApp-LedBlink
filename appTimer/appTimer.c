@@ -33,7 +33,9 @@
 //*****************************************************************************
 bool AppTimerConvertToTime(time_t ulEpochTime)
 {
-    bool blResult = true; // Return variable
+    // Return variable
+    bool blResult = true;
+
     uint16 unMinutes = 0;
     uint16 unHours   = 0;
     uint16 unSeconds = 0;
@@ -49,30 +51,53 @@ bool AppTimerConvertToTime(time_t ulEpochTime)
         blResult = false;
     }
 
-    unSeconds = ulEpochTime % SECONDS; // Storing Current second
+    // Storing Current second
+    unSeconds = ulEpochTime % SECONDS;
     ulEpochTime /= SECONDS;
 
-    unMinutes = ulEpochTime % SECONDS_IN_A_MINUTE; // Storing current Minute
+    // Storing current Minute
+    unMinutes = ulEpochTime % SECONDS_IN_A_MINUTE;
     ulEpochTime /= SECONDS_IN_A_MINUTE;
 
-    unHours= ulEpochTime % HOURS_IN_A_DAY; // Storing Current Hour
+    // Storing Current Hour
+    unHours= ulEpochTime % HOURS_IN_A_DAY;
     ulEpochTime /= HOURS_IN_A_DAY;
 
-    ulTotalDays = ulEpochTime; //Storing remaining days
+    //Storing remaining days
+    ulTotalDays = ulEpochTime;
 
-    ulYear = (ulEpochTime / DAYS_IN_A_YEAR) + INITIAL_YEAR; // Store Curr_year
+    //Store Current Year
+    ulYear = (ulEpochTime / DAYS_IN_A_YEAR) + INITIAL_YEAR;
 
-    for ( unIdx = INITIAL_YEAR; unIdx < ulYear; unIdx++)
+    for ( unIdx = INITIAL_YEAR; unIdx <= ulYear; unIdx++)
     {
+        //If leap year
         if (ZERO == unIdx % LEAP_YEAR_GAP && 
             (ZERO != (unIdx % LEAP_YEAR_CENTURY_EXCEPTION) ||
              ZERO == (unIdx % LEAP_YEAR_CENTURY_CORRECTION)))
         {
-            ulTotalDays -= DAYS_IN_LEAP_YEAR; // Subtract 366
+            // If current year is leap year
+            if (unIdx == ulYear) 
+            {
+                if (JAN_OR_FEB_DATE_FLAG >= ulTotalDays)
+                {
+                    break;
+                }
+                // Subtract a day
+                ulTotalDays--;
+                break;
+            }
+            // Subtract 366
+            ulTotalDays -= DAYS_IN_LEAP_YEAR;
         }
         else
         {
-            ulTotalDays -= DAYS_IN_A_YEAR; // Subtract 365
+            if (unIdx == ulYear)
+            {
+                break;
+            }
+            // Subtract 365
+            ulTotalDays -= DAYS_IN_A_YEAR;
         }
     }
     for (unIdx = MONTH_START; unIdx <= NUMBER_OF_MONTHS; unIdx++)
@@ -83,59 +108,60 @@ bool AppTimerConvertToTime(time_t ulEpochTime)
         }
         if (FIRST_PART_OF_THE_YEAR >= unIdx)
         {
+            // If even subtract 30
             if (IS_EVEN(unIdx))
             {
-                if (FEBRUARY == unIdx) // If February
+                // If current month is February Subtract 28
+                if (FEBRUARY == unIdx)
                 {
                     ulTotalDays -= DAYS_IN_FEBRUARY;
-
-                    if (FEBRUARY == unIdx && 
-                        (ZERO == ulYear % LEAP_YEAR_GAP &&
-                         (ZERO != (ulYear % LEAP_YEAR_CENTURY_EXCEPTION)||
-                          ZERO == (ulYear % LEAP_YEAR_CENTURY_CORRECTION))))
-                        {
-                            ulTotalDays--; // If leap year
-                        }
                 }
                 else
                 {
                     ulTotalDays -= MIN_DAYS_IN_A_MONTH;
                 }
             }
-            else // If odd
+            // Else subtract 31
+            else
             {
                 ulTotalDays -= MAX_DAYS_IN_A_MONTH;
             }
         }
         if (FIRST_PART_OF_THE_YEAR < unIdx)
         {
+            // If even subtract 31
             if (IS_EVEN(unIdx))
             {
                 ulTotalDays -= MAX_DAYS_IN_A_MONTH;
             }
-            else // If odd
+            //Else subtract 30
+            else
             {
                 ulTotalDays -= MIN_DAYS_IN_A_MONTH;
             }
             
         }
     }
-    unMonth = unIdx; // Store Current month
-    unDay = ulTotalDays + INCREMENT_ONE; // Add 1 to remaining days - Curr_Day
+    // Store Current month
+    unMonth = unIdx;
+    // Store Current day - Add 1 to get current date
+    unDay = ulTotalDays + INITIAL_DAY;
 
     if (PM_CHECK <= unHours)
     {
         strcpy((char*) ucMeridium,"PM");
         if (PM_CHECK < unHours)
         {
-            unHours -= MERIDIUM_FACTOR; // Update railway time
+            // Update railway time
+            unHours -= MERIDIUM_FACTOR;
         }
     }
     else
     {
         if (AM_CHECK == unHours)
         {
-            unHours += MERIDIUM_FACTOR; // Update railway time
+            // Update railway time
+            unHours += MERIDIUM_FACTOR;
         }
     }
 

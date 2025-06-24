@@ -34,13 +34,16 @@ int main()
 
     while(true)
     {
-        printf("\x1b[H\x1b[J"); // Move Cursor to top-left and clear screen
+        // Move Cursor to top-left and clear screen
+        printf("\x1b[H\x1b[J");
 
-        time(&ulCurrentTime); // Current time
+        // Current time
+        time(&ulCurrentTime);
 
         printf("\nUTC (0:00)\n");
 
-        if(AppTimerConvertToTime(ulCurrentTime))// GMT time
+        // GMT time
+        if(AppTimerConvertToTime(ulCurrentTime))
         {
             printf("Epoch : %lu\n",ulCurrentTime);
         }
@@ -51,7 +54,8 @@ int main()
 
         printf("\nIST (+5:30)\n");
 
-        if(!AppTimerConvertToTime(ulCurrentTime + IST_DIFFERENCE))// IST time
+        // IST time
+        if(!AppTimerConvertToTime(ulCurrentTime + IST_DIFFERENCE))
         {
             printf("\nInvalid Epoch\n");
         }
@@ -62,7 +66,8 @@ int main()
 
         printf("\nPST (-8:00)\n");
 
-        if(!AppTimerConvertToTime(ulCurrentTime - PST_DIFFERENCE))// PST time
+        // PST time
+        if(!AppTimerConvertToTime(ulCurrentTime - PST_DIFFERENCE))
         {
             printf("\nInvalid Epoch\n");
         }
@@ -71,7 +76,8 @@ int main()
             // Default case
         }
 
-        sleep(1); // Wait one second for refreshing time
+        // Wait one second for refreshing time
+        sleep(1);
     }
 
     return 0;
