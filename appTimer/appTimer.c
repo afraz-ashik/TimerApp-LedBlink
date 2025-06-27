@@ -71,12 +71,12 @@ bool AppTimerConvertToTime(time_t ulEpochTime)
     for ( unIdx = INITIAL_YEAR; unIdx <= ulYear; unIdx++)
     {
         //If leap year
-        if (ZERO == unIdx % LEAP_YEAR_GAP && 
+        if (ZERO == unIdx % LEAP_YEAR_GAP &&
            ((ZERO != (unIdx % LEAP_YEAR_CENTURY_EXCEPTION)) ||
            (ZERO == (unIdx % LEAP_YEAR_CENTURY_CORRECTION))))
         {
             // If current year is leap year
-            if (unIdx == ulYear) 
+            if (unIdx == ulYear)
             {
                 // If current year is leap year & current month is Jan or Feb
                 if (JAN_OR_FEB_DATE_FLAG >= ulTotalDays)
@@ -97,18 +97,19 @@ bool AppTimerConvertToTime(time_t ulEpochTime)
             {
                 break;
             }
-            
+
             // Subtract 365
             ulTotalDays -= DAYS_IN_A_YEAR;
         }
     }
-    
+
     for (unIdx = MONTH_START; unIdx <= NUMBER_OF_MONTHS; unIdx++)
     {
         if (MINIMUM_DAYS_THRESHOLD >= ulTotalDays)
         {
             break;
         }
+
         if (FIRST_PART_OF_THE_YEAR >= unIdx)
         {
             // If even subtract 30
@@ -130,7 +131,7 @@ bool AppTimerConvertToTime(time_t ulEpochTime)
                 ulTotalDays -= MAX_DAYS_IN_A_MONTH;
             }
         }
-        
+
         if (FIRST_PART_OF_THE_YEAR < unIdx)
         {
             // If even subtract 31
@@ -143,7 +144,7 @@ bool AppTimerConvertToTime(time_t ulEpochTime)
             {
                 ulTotalDays -= MIN_DAYS_IN_A_MONTH;
             }
-            
+
         }
     }
     // Store Current month

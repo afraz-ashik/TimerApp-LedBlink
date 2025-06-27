@@ -62,8 +62,9 @@ static bool PrintLedStatus(bool *blpLedStatus)
 
 //******************************.mainFunction.*********************************
 // Purpose : Display time and date in GMT, IST and PST timezone.
+//           Prints "LED ON" "LED OFF" every second.
 // Inputs  : None.
-// Outputs : Prints time and date in GMT, IST and PST timezone.
+// Outputs : None.
 // Return  : Zero.
 // Notes   : Refresh time every second.
 //*****************************************************************************
