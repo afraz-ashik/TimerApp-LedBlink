@@ -3,7 +3,8 @@
 // All Rights Reserved
 //*****************************************************************************
 // File    : main.c
-// Summary : Printing current time in GMT, IST and PST timezone.
+// Summary : Prints current time in GMT, IST and PST timezone.
+//           Infinte printf of "LED ON" "LED OFF" every second.
 // Note    : None
 // Author  : Afraz Ashik
 // Date    : 18/JUNE/25
@@ -13,6 +14,7 @@
 #include "appTimer.h"
 #include <unistd.h>
 
+
 //******************************* Local Types *********************************
 
 //***************************** Local Constants *******************************
@@ -20,6 +22,32 @@
 //***************************** Local Variables *******************************
 
 //****************************** Local Functions ******************************
+static void PrintLedStatus(bool *blLedStatus);
+
+//******************************.PrintLedStatus.*******************************
+// Purpose : Prints "LED ON" "LED OFF" every second.
+// Inputs  : blLedStatus - either true or false when fucntion is called
+// Outputs : blLedStatus - complimented.
+// Return  : None.
+// Notes   : None.
+//*****************************************************************************
+static void PrintLedStatus(bool *blpLedStatus)
+{
+    if (!*blpLedStatus)
+    {
+        printf("\nLED OFF\n");
+
+        // Set LED status to indicate OFF
+        *blpLedStatus = true;
+    }
+    else
+    {
+        printf("\nLED ON\n");
+
+        // Set LED status to indicate ON
+        *blpLedStatus = false;
+    }
+}
 
 //******************************.mainFunction.*********************************
 // Purpose : Display time and date in GMT, IST and PST timezone.
@@ -31,6 +59,7 @@
 int main()
 {
     time_t ulCurrentTime = 0;
+    bool blLedStatus = false;
 
     while(true)
     {
@@ -75,6 +104,9 @@ int main()
         {
             // Default case
         }
+
+        // Print LED Status
+        PrintLedStatus(&blLedStatus);
 
         // Wait one second for refreshing time
         sleep(1);
