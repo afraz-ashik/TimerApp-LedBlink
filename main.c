@@ -24,7 +24,7 @@
 //******************************.mainFunction.*********************************
 // Purpose : Display time and date in GMT, IST and PST timezone.
 // Inputs  : None.
-// Outputs : Prints time and date in GMT, IST and PST timezone.
+// Outputs : None.
 // Return  : Zero.
 // Notes   : Refresh time every second.
 //*****************************************************************************

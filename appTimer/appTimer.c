@@ -12,7 +12,6 @@
 //******************************* Include Files *******************************
 #include "appTimer.h"
 #include <string.h>
-#include <common.h>
 
 //******************************* Local Types *********************************
 
@@ -110,6 +109,7 @@ bool AppTimerConvertToTime(time_t ulEpochTime)
         {
             break;
         }
+
         if (FIRST_PART_OF_THE_YEAR >= unIdx)
         {
             // If even subtract 30
@@ -173,7 +173,7 @@ bool AppTimerConvertToTime(time_t ulEpochTime)
 
     printf("--------------------\n");
     printf("TIME  : %02hu:%02hu:%02hu %s\n",
-        unHours,unMinutes,unSeconds,ucMeridium);
+           unHours,unMinutes,unSeconds,ucMeridium);
     printf("DATE  : %02hu/%02hu/%lu\n",unDay,unMonth,ulYear);
 
     return blResult;
