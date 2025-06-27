@@ -22,7 +22,7 @@
 //***************************** Local Variables *******************************
 
 //****************************** Local Functions ******************************
-static void PrintLedStatus(bool *blLedStatus);
+static bool PrintLedStatus(bool *blLedStatus);
 
 //******************************.PrintLedStatus.*******************************
 // Purpose : Prints "LED ON" "LED OFF" every second.
@@ -31,15 +31,24 @@ static void PrintLedStatus(bool *blLedStatus);
 // Return  : None.
 // Notes   : None.
 //*****************************************************************************
-static void PrintLedStatus(bool *blpLedStatus)
+static bool PrintLedStatus(bool *blpLedStatus)
 {
-    if (!*blpLedStatus)
+    bool blNullFLag =true;
+
+    // If pointer is Null
+    if (NULL == blpLedStatus)
+    {
+        blNullFLag = false;
+    }
+    // if LED is indicated to be OFF
+    else if (!*blpLedStatus)
     {
         printf("\nLED OFF\n");
 
         // Set LED status to indicate OFF
         *blpLedStatus = true;
     }
+    // if LED is indicated to be ON
     else
     {
         printf("\nLED ON\n");
@@ -47,6 +56,8 @@ static void PrintLedStatus(bool *blpLedStatus)
         // Set LED status to indicate ON
         *blpLedStatus = false;
     }
+
+    return blNullFLag;
 }
 
 //******************************.mainFunction.*********************************
@@ -106,7 +117,10 @@ int main()
         }
 
         // Print LED Status
-        PrintLedStatus(&blLedStatus);
+        if (!PrintLedStatus(&blLedStatus))
+        {
+            printf("\nNull pointer\n");
+        }
 
         // Wait one second for refreshing time
         sleep(1);
