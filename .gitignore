@@ -8,3 +8,5 @@
 #text file
 *.txt
 *.sh
+#binary executable file
+*
