@@ -71,7 +71,7 @@ static bool PrintLedStatus(bool *blpLedStatus)
 int main()
 {
     time_t ulCurrentTime = 0;
-    bool blLedStatus = false;
+    bool blLedStatus     = false;
 
     while(true)
     {

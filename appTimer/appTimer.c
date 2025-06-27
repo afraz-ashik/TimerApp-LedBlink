@@ -35,14 +35,15 @@ bool AppTimerConvertToTime(time_t ulEpochTime)
     // Return variable
     bool blResult = true;
 
-    uint16 unMinutes = 0;
-    uint16 unHours   = 0;
-    uint16 unSeconds = 0;
+    uint16 unMinutes   = 0;
+    uint16 unHours     = 0;
+    uint16 unSeconds   = 0;
     uint32 ulTotalDays = 0;
-    uint16 unMonth = 0;
-    uint16 unDay = 0;
-    uint32 ulYear = 0;
-    uint16 unIdx = 0;
+    uint16 unMonth     = 0;
+    uint16 unDay       = 0;
+    uint32 ulYear      = 0;
+    uint16 unIdx       = 0;
+    
     uint8 ucMeridium[MERIDIUM_SIZE] = "AM";
 
     if (ZERO == ulEpochTime)
@@ -51,15 +52,15 @@ bool AppTimerConvertToTime(time_t ulEpochTime)
     }
 
     // Storing Current second
-    unSeconds = ulEpochTime % SECONDS;
+    unSeconds    = ulEpochTime % SECONDS;
     ulEpochTime /= SECONDS;
 
     // Storing current Minute
-    unMinutes = ulEpochTime % SECONDS_IN_A_MINUTE;
+    unMinutes    = ulEpochTime % SECONDS_IN_A_MINUTE;
     ulEpochTime /= SECONDS_IN_A_MINUTE;
 
     // Storing Current Hour
-    unHours= ulEpochTime % HOURS_IN_A_DAY;
+    unHours      = ulEpochTime % HOURS_IN_A_DAY;
     ulEpochTime /= HOURS_IN_A_DAY;
 
     //Storing remaining days
