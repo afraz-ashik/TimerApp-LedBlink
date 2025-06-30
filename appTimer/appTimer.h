@@ -11,8 +11,6 @@
 #define _APP_TIMER_H_
 
 //******************************* Include Files *******************************
-#include <stdio.h>
-#include <stdbool.h>
 #include <time.h>
 #include <common.h>
 

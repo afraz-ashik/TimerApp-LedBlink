@@ -3,7 +3,7 @@
 // All Rights Reserved
 //*****************************************************************************
 //
-// Summary : forwards decalrations are included
+// Summary : Inlcude files declared and forwards decalrations are included
 // Note    : None
 //
 //*****************************************************************************
@@ -11,8 +11,7 @@
 #define _LED_SIMULATION_H_
 
 //******************************* Include Files *******************************
-#include<stdio.h>
-#include <stdbool.h>
+#include "common.h"
 
 //******************************* Global Types ********************************
 

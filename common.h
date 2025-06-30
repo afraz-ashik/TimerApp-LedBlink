@@ -11,6 +11,8 @@
 #define _COMMON_H_ 
 
 //******************************* Include Files *******************************
+#include <stdio.h>
+#include <stdbool.h>
 
 //******************************* Global Types ********************************
 typedef unsigned long uint32;

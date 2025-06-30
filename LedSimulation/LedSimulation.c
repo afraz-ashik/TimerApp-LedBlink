@@ -3,7 +3,7 @@
 // All Rights Reserved
 //*****************************************************************************
 // File    : LedSimulation.c
-// Summary : Infinite printf of "LED ON" "LED OFF" every second.
+// Summary : Display "LED ON" or "LED OFF".
 // Note    : None.
 // Author  : Afraz Ashik
 // Date    : 27/June/2025
@@ -13,21 +13,21 @@
 #include "LedSimulation.h"
 
 //******************************* Local Types *********************************
-static bool sblLedStatus = false;
 
 //***************************** Local Constants *******************************
 
 //***************************** Local Variables *******************************
+static bool sblLedStatus = false;
 
 //****************************** Local Functions ******************************
 
 //*****************************************************************************
 
 //******************************.PrintLedStatus.*******************************
-// Purpose : Prints "LED ON" "LED OFF" every second.
+// Purpose : Prints "LED ON" or "LED OFF".
 // Inputs  : None.
 // Outputs : None.
-// Return  : blResult - true.
+// Return  : true.
 // Notes   : None.
 //*****************************************************************************
 bool LedSimulationDisplay()
