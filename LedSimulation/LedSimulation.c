@@ -37,7 +37,7 @@ bool LedSimulationDisplay()
     {
         printf("\nLED OFF\n");
 
-        // Set LED status to indicate OFF
+        // Set LED status to indicate ON
         sblLedStatus = true;
     }
     // if LED is indicated to be ON
@@ -45,7 +45,7 @@ bool LedSimulationDisplay()
     {
         printf("\nLED ON\n");
 
-        // Set LED status to indicate ON
+        // Set LED status to indicate OFF
         sblLedStatus = false;
     }
 
