@@ -17,7 +17,6 @@
 //***************************** Local Constants *******************************
 
 //***************************** Local Variables *******************************
-static bool sblLedStatus = false;
 
 //****************************** Local Functions ******************************
 
@@ -32,6 +31,8 @@ static bool sblLedStatus = false;
 //*****************************************************************************
 bool LedSimulationDisplay()
 {
+    static bool sblLedStatus = false;
+
     // if LED is indicated to be OFF
     if (!sblLedStatus)
     {
