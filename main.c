@@ -36,7 +36,6 @@
 int main()
 {
     time_t ulCurrentTime = 0;
-    bool blLedStatus     = false;
 
     while(true)
     {
@@ -83,14 +82,7 @@ int main()
         }
 
         // Print LED Status
-        if (!LedSimulationDisplay(&blLedStatus))
-        {
-            printf("\nNull pointer\n");
-        }
-        else
-        {
-            // Default case
-        }
+        LedSimulationDisplay();
 
         // Wait one second for refreshing time
         sleep(1);

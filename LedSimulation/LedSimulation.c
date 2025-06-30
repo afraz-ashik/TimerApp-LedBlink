@@ -13,6 +13,7 @@
 #include "LedSimulation.h"
 
 //******************************* Local Types *********************************
+static bool sblLedStatus = false;
 
 //***************************** Local Constants *******************************
 
@@ -24,27 +25,20 @@
 
 //******************************.PrintLedStatus.*******************************
 // Purpose : Prints "LED ON" "LED OFF" every second.
-// Inputs  : blpLedStatus - either true or false when fucntion is called
-// Outputs : blpLedStatus - compliment of input BlLedStatus.
-// Return  : blResult - false if pointer is NULL, else true.
+// Inputs  : None.
+// Outputs : None.
+// Return  : blResult - true.
 // Notes   : None.
 //*****************************************************************************
-bool LedSimulationDisplay(bool *blpLedStatus)
+bool LedSimulationDisplay()
 {
-    bool blResult = true;
-
-    // If pointer is Null
-    if (NULL == blpLedStatus)
-    {
-        blResult = false;
-    }
     // if LED is indicated to be OFF
-    else if (!*blpLedStatus)
+    if (!sblLedStatus)
     {
         printf("\nLED OFF\n");
 
         // Set LED status to indicate OFF
-        *blpLedStatus = true;
+        sblLedStatus = true;
     }
     // if LED is indicated to be ON
     else
@@ -52,10 +46,10 @@ bool LedSimulationDisplay(bool *blpLedStatus)
         printf("\nLED ON\n");
 
         // Set LED status to indicate ON
-        *blpLedStatus = false;
+        sblLedStatus = false;
     }
 
-    return blResult;
+    return true;
 }
 
 // EOF

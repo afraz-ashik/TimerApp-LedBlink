@@ -21,7 +21,7 @@
 //***************************** Global Variables ******************************
 
 //**************************** Forward Declarations ***************************
-bool LedSimulationDisplay(bool *blpLedStatus);
+bool LedSimulationDisplay();
 
 //*********************** Inline Method Implementations ***********************
 
