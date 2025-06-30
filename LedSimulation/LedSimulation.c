@@ -24,8 +24,8 @@
 
 //******************************.PrintLedStatus.*******************************
 // Purpose : Prints "LED ON" "LED OFF" every second.
-// Inputs  : *blpLedStatus - either true or false when fucntion is called
-// Outputs : *blpLedStatus - compliment of input BlLedStatus.
+// Inputs  : blpLedStatus - either true or false when fucntion is called
+// Outputs : blpLedStatus - compliment of input BlLedStatus.
 // Return  : blResult - false if pointer is NULL, else true.
 // Notes   : None.
 //*****************************************************************************
