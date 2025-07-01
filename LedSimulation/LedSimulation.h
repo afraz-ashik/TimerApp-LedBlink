@@ -1,31 +1,28 @@
-//********************************* Common ************************************
+//******************************* Led Simulation ******************************
 // Copyright (c) 2025 Trenser Technology Solutions
-// All Rights Reserved 
+// All Rights Reserved
 //*****************************************************************************
-// 
-// Summary : Typedefs are included.
+//
+// Summary : Inlcude files declared and forwards decalrations are included
 // Note    : None
-// 
+//
 //*****************************************************************************
-#ifndef _COMMON_H_
-#define _COMMON_H_ 
+#ifndef _LED_SIMULATION_H_
+#define _LED_SIMULATION_H_
 
 //******************************* Include Files *******************************
-#include <stdio.h>
-#include <stdbool.h>
+#include "common.h"
 
 //******************************* Global Types ********************************
-typedef unsigned long uint32;
-typedef unsigned short uint16;
-typedef unsigned char uint8;
 
 //***************************** Global Constants ******************************
 
 //***************************** Global Variables ******************************
 
 //**************************** Forward Declarations ***************************
+bool LedSimulationDisplay();
 
 //*********************** Inline Method Implementations ***********************
 
-#endif // _COMMON_H_ 
-// EOF 
+#endif // _LED_SIMULATION_H_
+// EOF

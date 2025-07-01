@@ -1,9 +1,10 @@
-//******************************** App Timer **********************************
+//*********************************** Main ************************************
 // Copyright (c) 2025 Trenser Technology Solutions
 // All Rights Reserved
 //*****************************************************************************
 // File    : main.c
-// Summary : Printing current time in GMT, IST and PST timezone.
+// Summary : Prints current time in GMT, IST and PST timezone.
+//           Infinite printf of "LED ON" "LED OFF" every second.
 // Note    : None
 // Author  : Afraz Ashik
 // Date    : 18/JUNE/25
@@ -11,6 +12,7 @@
 
 //******************************* Include Files *******************************
 #include "appTimer.h"
+#include "LedSimulation.h"
 #include <unistd.h>
 
 //******************************* Local Types *********************************
@@ -21,8 +23,11 @@
 
 //****************************** Local Functions ******************************
 
+//*****************************************************************************
+
 //******************************.mainFunction.*********************************
 // Purpose : Display time and date in GMT, IST and PST timezone.
+//           Prints "LED ON" "LED OFF" every second.
 // Inputs  : None.
 // Outputs : None.
 // Return  : Zero.
@@ -75,6 +80,9 @@ int main()
         {
             // Default case
         }
+
+        // Print LED Status
+        LedSimulationDisplay();
 
         // Wait one second for refreshing time
         sleep(1);

@@ -35,14 +35,15 @@ bool AppTimerConvertToTime(time_t ulEpochTime)
     // Return variable
     bool blResult = true;
 
-    uint16 unMinutes = 0;
-    uint16 unHours   = 0;
-    uint16 unSeconds = 0;
+    uint16 unMinutes   = 0;
+    uint16 unHours     = 0;
+    uint16 unSeconds   = 0;
     uint32 ulTotalDays = 0;
-    uint16 unMonth = 0;
-    uint16 unDay = 0;
-    uint32 ulYear = 0;
-    uint16 unIdx = 0;
+    uint16 unMonth     = 0;
+    uint16 unDay       = 0;
+    uint32 ulYear      = 0;
+    uint16 unIdx       = 0;
+    
     uint8 ucMeridium[MERIDIUM_SIZE] = "AM";
 
     if (ZERO == ulEpochTime)
@@ -51,15 +52,15 @@ bool AppTimerConvertToTime(time_t ulEpochTime)
     }
 
     // Storing Current second
-    unSeconds = ulEpochTime % SECONDS;
+    unSeconds    = ulEpochTime % SECONDS;
     ulEpochTime /= SECONDS;
 
     // Storing current Minute
-    unMinutes = ulEpochTime % SECONDS_IN_A_MINUTE;
+    unMinutes    = ulEpochTime % SECONDS_IN_A_MINUTE;
     ulEpochTime /= SECONDS_IN_A_MINUTE;
 
     // Storing Current Hour
-    unHours= ulEpochTime % HOURS_IN_A_DAY;
+    unHours      = ulEpochTime % HOURS_IN_A_DAY;
     ulEpochTime /= HOURS_IN_A_DAY;
 
     //Storing remaining days
@@ -71,12 +72,12 @@ bool AppTimerConvertToTime(time_t ulEpochTime)
     for ( unIdx = INITIAL_YEAR; unIdx <= ulYear; unIdx++)
     {
         //If leap year
-        if (ZERO == unIdx % LEAP_YEAR_GAP && 
+        if (ZERO == unIdx % LEAP_YEAR_GAP &&
            ((ZERO != (unIdx % LEAP_YEAR_CENTURY_EXCEPTION)) ||
            (ZERO == (unIdx % LEAP_YEAR_CENTURY_CORRECTION))))
         {
             // If current year is leap year
-            if (unIdx == ulYear) 
+            if (unIdx == ulYear)
             {
                 // If current year is leap year & current month is Jan or Feb
                 if (JAN_OR_FEB_DATE_FLAG >= ulTotalDays)
@@ -97,12 +98,12 @@ bool AppTimerConvertToTime(time_t ulEpochTime)
             {
                 break;
             }
-            
+
             // Subtract 365
             ulTotalDays -= DAYS_IN_A_YEAR;
         }
     }
-    
+
     for (unIdx = MONTH_START; unIdx <= NUMBER_OF_MONTHS; unIdx++)
     {
         if (MINIMUM_DAYS_THRESHOLD >= ulTotalDays)
@@ -131,7 +132,7 @@ bool AppTimerConvertToTime(time_t ulEpochTime)
                 ulTotalDays -= MAX_DAYS_IN_A_MONTH;
             }
         }
-        
+
         if (FIRST_PART_OF_THE_YEAR < unIdx)
         {
             // If even subtract 31
@@ -144,7 +145,7 @@ bool AppTimerConvertToTime(time_t ulEpochTime)
             {
                 ulTotalDays -= MIN_DAYS_IN_A_MONTH;
             }
-            
+
         }
     }
     // Store Current month

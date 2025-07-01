@@ -11,10 +11,8 @@
 #define _APP_TIMER_H_
 
 //******************************* Include Files *******************************
-#include <stdio.h>
-#include <stdbool.h>
 #include <time.h>
-#include <common.h>
+#include "common.h"
 
 //******************************* Global Types ********************************
 
@@ -38,7 +36,7 @@
 #define LEAP_YEAR_GAP                   (4)
 #define LEAP_YEAR_CENTURY_EXCEPTION     (100)
 #define LEAP_YEAR_CENTURY_CORRECTION    (400)
-#define MINIMUM_DAYS_THRESHOLD          (28)
+#define MINIMUM_DAYS_THRESHOLD          (29)
 #define FEBRUARY                        (2)
 #define PM_CHECK                        (12)
 #define AM_CHECK                        (0)
