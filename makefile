@@ -53,6 +53,15 @@ APPTIMER_O = release/appTimer.o
 # Path to the file LedSimulation.o
 LEDSIMULATION_O = release/LedSimulation.o
 
+# Path to the file main.o
+MAIN_O = debug/main.o
+
+# Path to the file appTimer.o
+APPTIMER_O = debug/appTimer.o
+
+# Path to the file LedSimulation.o
+LEDSIMULATION_O = debug/LedSimulation.o
+
 # Path to the file main.s
 MAIN_S = release/main.s
 
@@ -79,7 +88,9 @@ OBJ = $(MAIN_O) $(APPTIMER_O) $(LEDSIMULATION_O)
 
 ASM = $(MAIN_S) $(APPTIMER_S) $(LEDSIMULATION_S)
 
-linux: makeDir $(OBJ) $(ASM)
+OBJDEB = $(MAIN_O) $(APPTIMER_O) $(LEDSIMULATION_O)
+
+linux: makeDir $(OBJ) $(ASM) 
 
 release/%.o : %.c
 	$(CC) $(CFLAGS) $(SRCFLAG) $^ -o $@
@@ -105,4 +116,3 @@ appTimerArm64:
 # remove the Generated folders and files
 clean: 
 	$(RM) $(DIR)
-
