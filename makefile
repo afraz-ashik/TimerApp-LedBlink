@@ -1,10 +1,11 @@
-RM = rm -f
+RM = rm -f -r
 CC = gcc
 CC64 = aarch64-linux-gnu-gcc
 
 CFLAGS = -Wall -Wextra -Werror
 CPPFLAGS = -I. -IappTimer -ILedSimulation
-
+CREATE_DIR = mkdir -p
+DIR = release/ debug/
 OUTPUTS = release/$(@)
 DEBUG = debug/$(@)
 
@@ -13,8 +14,10 @@ LEDSIMULATION_C_PATH= LedSimulation/LedSimulation.c
 APPTIMER_O_PATH = release/appTimer.o
 LEDSIMULATION_O_PATH= release/LedSimulation.o
 
-all: linux output rpi
+all:make_dir linux output rpi
 
+make_dir:
+	$(CREATE_DIR) $(DIR)
 # Create object files
 linux: main.o main.s appTimer.o appTimer.s LedSimulation.o LedSimulation.s
 # Create object file for main.c
@@ -51,8 +54,4 @@ appTimerArm64: main.c $(APPTIMER_C_PATH) $(LEDSIMULATION_C_PATH)
 	$(CC64) main.c $(APPTIMER_C_PATH) $(CPPFLAGS) $(LEDSIMULATION_C_PATH) -o $(OUTPUTS)
 
 clean: 
-	$(RM) release/*.o
-	$(RM) release/*.s
-	$(RM) release/*.txt
-	$(RM) release/*.exe
-	$(RM) release/appTimerArm64
+	$(RM) $(DIR)
