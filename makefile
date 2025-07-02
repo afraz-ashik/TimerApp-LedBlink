@@ -1,57 +1,108 @@
+# Remove folders/files
 RM = rm -f -r
+
+
+# C compiler
 CC = gcc
+
+# Compiler for 64 bit ARM architecture based linux system
 CC64 = aarch64-linux-gnu-gcc
 
-CFLAGS = -Wall -Wextra -Werror
-CPPFLAGS = -I. -IappTimer -ILedSimulation
-CREATE_DIR = mkdir -p
+# Warning flags
+WFLAG = -Wall -Wextra -Werror
+
+# Include flags
+INCLUDES = -I. -IappTimer -ILedSimulation
+
+# Flag that combines warning and include flag
+CFLAGS = $(WFLAG) $(INCLUDES)
+
+#Flag to generate object file
+SRCFLAG = -c
+
+#Flag to generate object file with debug information
+DSRCFLAG = -g -c
+
+#Flag to generate assembly file
+ASMFLAG = -S
+
+# Make directory command
+MAKEDIRCMD = mkdir -p
+
+# Directory names
 DIR = release/ debug/
-OUTPUTS = release/$(@)
-DEBUG = debug/$(@)
 
-APPTIMER_C_PATH = appTimer/appTimer.c
-LEDSIMULATION_C_PATH= LedSimulation/LedSimulation.c
-APPTIMER_O_PATH = release/appTimer.o
-LEDSIMULATION_O_PATH= release/LedSimulation.o
+# Path for the generated files
+EXEDIR = -o release/$(@)
 
-all:make_dir linux output rpi
+#  Path for Debug support files
+DEBUGDIR = -o debug/$(@)
 
-make_dir:
-	$(CREATE_DIR) $(DIR)
-# Create object files
-linux: main.o main.s appTimer.o appTimer.s LedSimulation.o LedSimulation.s
-# Create object file for main.c
+# Path to the file appTimer.c
+APPTIMER_C = appTimer/appTimer.c
 
-main.o: main.c $(APPTIMER_C_PATH) $(LEDSIMULATION_C_PATH)
-	$(CC) $(CFLAGS) -c $(CPPFLAGS) -o $(OUTPUTS) main.c
-	$(CC) $(CFLAGS) -c $(CPPFLAGS) -o $(DEBUG) main.c
+# Path to the file LedSimulation.c
+LEDSIMULATION_C = LedSimulation/LedSimulation.c
 
-main.s: main.c $(APPTIMER_C_PATH) $(LEDSIMULATION_C_PATH)
-	$(CC) $(CFLAGS) -S $(CPPFLAGS) -o $(OUTPUTS) main.c
+# Path to the file main.o
+MAIN_O = release/main.o
 
-# Create object file for appTimer.c
-appTimer.o: $(APPTIMER_C_PATH) $(LEDSIMULATION_C_PATH)
-	$(CC) $(CFLAGS) -c $(CPPFLAGS) -o $(OUTPUTS) $(APPTIMER_C_PATH)
+# Path to the file appTimer.o
+APPTIMER_O = release/appTimer.o
 
-appTimer.s: $(APPTIMER_C_PATH) $(LEDSIMULATION_C_PATH)
-	$(CC) $(CFLAGS) -S $(CPPFLAGS) -o $(OUTPUTS) $(APPTIMER_C_PATH)
+# Path to the file LedSimulation.o
+LEDSIMULATION_O = release/LedSimulation.o
 
-# Create object file for LedSimulation.c
-LedSimulation.o: main.c $(APPTIMER_C_PATH) $(LEDSIMULATION_C_PATH)
-	$(CC) $(CFLAGS) -c $(CPPFLAGS) -o $(OUTPUTS) $(LEDSIMULATION_C_PATH)
+# Path to the file main.s
+MAIN_S = release/main.s
 
-LedSimulation.s: main.c $(APPTIMER_C_PATH) $(LEDSIMULATION_C_PATH)
-	$(CC) $(CFLAGS) -S $(CPPFLAGS) -o $(OUTPUTS) $(LEDSIMULATION_C_PATH)
+# Path to the file appTimer.o
+APPTIMER_S = release/appTimer.s
 
-output: appTimerOutput.exe
+# Path to the file LedSimulation.s
+LEDSIMULATION_S = release/LedSimulation.s
 
-appTimerOutput.exe: release/main.o release/appTimer.o release/LedSimulation.o
-	$(CC) release/main.o release/appTimer.o release/LedSimulation.o -o $(OUTPUTS)
+# Rules
 
-rpi: appTimerArm64
+# Execute all rules except clean
+all:makeDir linux output rpi
 
-appTimerArm64: main.c $(APPTIMER_C_PATH) $(LEDSIMULATION_C_PATH)
-	$(CC64) main.c $(APPTIMER_C_PATH) $(CPPFLAGS) $(LEDSIMULATION_C_PATH) -o $(OUTPUTS)
+# Create required directory if it doesn't exist
+makeDir:
+	$(MAKEDIRCMD) $(DIR)
 
+# Call rules to create object and assembly files
+# Path to find .c files
+VPATH = .:appTimer/:LedSimulation/:release/
+
+OBJ = $(MAIN_O) $(APPTIMER_O) $(LEDSIMULATION_O)
+
+ASM = $(MAIN_S) $(APPTIMER_S) $(LEDSIMULATION_S)
+
+linux: makeDir $(OBJ) $(ASM)
+
+release/%.o : %.c
+	$(CC) $(CFLAGS) $(SRCFLAG) $^ -o $@
+
+debug/%.o : %.c
+	$(CC) $(CFLAGS) $(DSRCFLAG) $^ -o $@
+
+release/%.s : %.c
+	$(CC) $(CFLAGS) $(SRCFLAG) $^ -o $@
+
+# Create the output file
+output: makeDir appTimerOutput.exe
+
+appTimerOutput.exe:
+	$(CC) $(MAIN_O) $(APPTIMER_O) $(LEDSIMULATION_O) $(EXEDIR)
+
+# Cross compile
+rpi: makeDir appTimerArm64
+
+appTimerArm64:
+	$(CC64) main.c $(APPTIMER_C) $(INCLUDES) $(LEDSIMULATION_C) $(EXEDIR)
+
+# remove the Generated folders and files
 clean: 
 	$(RM) $(DIR)
+
