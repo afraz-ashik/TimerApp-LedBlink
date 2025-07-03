@@ -5,8 +5,9 @@
 *.o
 #folder
 *.vscode
-#text file
-*.txt
+#shell script
 *.sh
 #binary executable file
 *appTimerArm64
+#folder named "build"
+*build
