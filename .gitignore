@@ -7,7 +7,9 @@
 *.vscode
 #shell script
 *.sh
-#binary executable file
+#executable file
 *appTimerArm64
 #folder named "build"
 *build
+*release
+*debug
