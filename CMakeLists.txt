@@ -22,7 +22,7 @@ target_compile_options(appTimerOutput PRIVATE
                       -Wall -Werror -Wextra)
 
 set_target_properties(appTimerOutput PROPERTIES 
-    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/release)
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/release)
 
 # For debug folder
 add_executable(appTimerOutput_debug ${SRCFILES})
@@ -31,4 +31,4 @@ target_compile_options(appTimerOutput_debug PRIVATE
                       -Wall -Werror -Wextra -g -O0)
 
 set_target_properties(appTimerOutput_debug PROPERTIES 
-    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/debug)
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/debug)
