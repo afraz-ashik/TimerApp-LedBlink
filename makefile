@@ -1,27 +1,23 @@
+# List if directories for make to search
+VPATH = .:appTimer/:LedSimulation/:release/
+
 # Remove folders/files
 RM = rm -f -r
-
 
 # C compiler
 CC = gcc
 
 # Compiler for 64 bit ARM architecture based linux system
-CC64 = aarch64-linux-gnu-gcc
-
-# Warning flags
-WFLAG = -Wall -Wextra -Werror
-
-# Include flags
-INCLUDES = -I. -IappTimer -ILedSimulation
+CCRPI = aarch64-linux-gnu-gcc
 
 # Flag that combines warning and include flag
-CFLAGS = $(WFLAG) $(INCLUDES)
+CFLAGS = -Wall -Wextra -Werror -I. -IappTimer -ILedSimulation
 
 #Flag to generate object file
 SRCFLAG = -c
 
 #Flag to generate object file with debug information
-DSRCFLAG = -g -c
+DSRCFLAG = -g -c -O0
 
 #Flag to generate assembly file
 ASMFLAG = -S
@@ -35,83 +31,56 @@ DIR = release/ debug/
 # Path for the generated files
 EXEDIR = -o release/$(@)
 
-#  Path for Debug support files
-DEBUGDIR = -o debug/$(@)
+# All .c files
+CFILE = $(wildcard *.c appTimer/*.c LedSimulation/*.c)
 
-# Path to the file appTimer.c
-APPTIMER_C = appTimer/appTimer.c
+# Path for .o files
+OBJ = release/main.o release/appTimer.o release/LedSimulation.o
 
-# Path to the file LedSimulation.c
-LEDSIMULATION_C = LedSimulation/LedSimulation.c
+# Path for .s files
+ASM = $(patsubst release/%.o,%.c,$(OBJ))
 
-# Path to the file main.o
-MAIN_O = release/main.o
-
-# Path to the file appTimer.o
-APPTIMER_O = release/appTimer.o
-
-# Path to the file LedSimulation.o
-LEDSIMULATION_O = release/LedSimulation.o
-
-# Path to the file main.o
-MAIN_O = debug/main.o
-
-# Path to the file appTimer.o
-APPTIMER_O = debug/appTimer.o
-
-# Path to the file LedSimulation.o
-LEDSIMULATION_O = debug/LedSimulation.o
-
-# Path to the file main.s
-MAIN_S = release/main.s
-
-# Path to the file appTimer.o
-APPTIMER_S = release/appTimer.s
-
-# Path to the file LedSimulation.s
-LEDSIMULATION_S = release/LedSimulation.s
+# Path for debug supported .o files
+OBJDEB = $(subst release,debug,$(OBJ))
 
 # Rules
 
 # Execute all rules except clean
-all:makeDir linux output rpi
+all:makeDir linux rpi
 
 # Create required directory if it doesn't exist
 makeDir:
 	$(MAKEDIRCMD) $(DIR)
 
 # Call rules to create object and assembly files
-# Path to find .c files
-VPATH = .:appTimer/:LedSimulation/:release/
+linux: makeDir $(OBJ) $(ASM) $(OBJDEB) output
 
-OBJ = $(MAIN_O) $(APPTIMER_O) $(LEDSIMULATION_O)
+# Using pattern matching to compile
 
-ASM = $(MAIN_S) $(APPTIMER_S) $(LEDSIMULATION_S)
-
-OBJDEB = $(MAIN_O) $(APPTIMER_O) $(LEDSIMULATION_O)
-
-linux: makeDir $(OBJ) $(ASM) 
-
+# Object file
 release/%.o : %.c
 	$(CC) $(CFLAGS) $(SRCFLAG) $^ -o $@
 
+# Debug supported object file
 debug/%.o : %.c
 	$(CC) $(CFLAGS) $(DSRCFLAG) $^ -o $@
 
+# Assembly files
 release/%.s : %.c
-	$(CC) $(CFLAGS) $(SRCFLAG) $^ -o $@
+	$(CC) $(CFLAGS) $(ASMFLAG) $^ -o $@
 
 # Create the output file
-output: makeDir appTimerOutput.exe
+output: appTimerOutput.exe
 
 appTimerOutput.exe:
-	$(CC) $(MAIN_O) $(APPTIMER_O) $(LEDSIMULATION_O) $(EXEDIR)
+	$(CC) $(OBJ) $(EXEDIR)
 
-# Cross compile
+# Cross compile for Raspberrypi
 rpi: makeDir appTimerArm64
 
 appTimerArm64:
-	$(CC64) main.c $(APPTIMER_C) $(INCLUDES) $(LEDSIMULATION_C) $(EXEDIR)
+	$(CCRPI) $(CFILE) $(CFLAGS) $(EXEDIR)
+
 
 # remove the Generated folders and files
 clean: 
