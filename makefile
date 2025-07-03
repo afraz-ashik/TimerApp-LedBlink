@@ -43,7 +43,7 @@ OBJ += release/appTimer.o
 OBJ += release/LedSimulation.o
 
 # Path for .s files
-ASM = $(patsubst release/%.o,%.c,$(OBJ))
+ASM = $(patsubst release/%.o,release/%.s,$(OBJ))
 
 # Path for debug supported .o files
 OBJDEB = $(subst release,debug,$(OBJ))
@@ -58,23 +58,21 @@ makeDir:
 	$(MAKEDIRCMD) $(DIR)
 
 # Call rules to create object and assembly files
-# To execute recipe in linux without searching for a file named linux
-.PHONY: linux
-linux: makeDir $(OBJ) $(ASM) $(OBJDEB) output
 
+linux:: makeDir $(OBJ) $(ASM) $(OBJDEB) output
 # Using pattern matching to compile
 
 # Object file
-release/%.o : %.c
+release/%.o :: %.c
 	$(CC) $(CFLAGS) $(SRCFLAG) $^ -o $@
+
+# Assembly files
+release/%.s :: %.c
+	$(CC) $(CFLAGS) $(ASMFLAG) $^ -o $@
 
 # Debug supported object file
 debug/%.o : %.c
 	$(CC) $(CFLAGS) $(DSRCFLAG) $^ -o $@
-
-# Assembly files
-release/%.s : %.c
-	$(CC) $(CFLAGS) $(ASMFLAG) $^ -o $@
 
 # Create the output file
 output: appTimerOutput.exe
