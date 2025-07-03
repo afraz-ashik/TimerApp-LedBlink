@@ -1,4 +1,4 @@
-# List if directories for make to search
+# List of directories for make to search
 VPATH = .:appTimer/:LedSimulation/:release/
 
 # Remove folders/files
@@ -11,13 +11,16 @@ CC = gcc
 CCRPI = aarch64-linux-gnu-gcc
 
 # Flag that combines warning and include flag
-CFLAGS = -Wall -Wextra -Werror -I. -IappTimer -ILedSimulation
+CFLAGS  = -Wall -Wextra -Werror 
+CFLAGS += -I. -IappTimer -ILedSimulation
 
 #Flag to generate object file
 SRCFLAG = -c
 
 #Flag to generate object file with debug information
-DSRCFLAG = -g -c -O0
+DSRCFLAG  = -g 
+DSRCFLAG += -c 
+DSRCFLAG += -O0
 
 #Flag to generate assembly file
 ASMFLAG = -S
@@ -35,7 +38,9 @@ EXEDIR = -o release/$(@)
 CFILE = $(wildcard *.c appTimer/*.c LedSimulation/*.c)
 
 # Path for .o files
-OBJ = release/main.o release/appTimer.o release/LedSimulation.o
+OBJ  = release/main.o 
+OBJ += release/appTimer.o 
+OBJ += release/LedSimulation.o
 
 # Path for .s files
 ASM = $(patsubst release/%.o,%.c,$(OBJ))
@@ -53,6 +58,8 @@ makeDir:
 	$(MAKEDIRCMD) $(DIR)
 
 # Call rules to create object and assembly files
+# To execute recipe in linux without searching for a file named linux
+.PHONY: linux
 linux: makeDir $(OBJ) $(ASM) $(OBJDEB) output
 
 # Using pattern matching to compile
@@ -80,7 +87,6 @@ rpi: makeDir appTimerArm64
 
 appTimerArm64:
 	$(CCRPI) $(CFILE) $(CFLAGS) $(EXEDIR)
-
 
 # remove the Generated folders and files
 clean: 
