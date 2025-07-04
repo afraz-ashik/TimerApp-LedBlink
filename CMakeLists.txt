@@ -32,3 +32,11 @@ target_compile_options(appTimerOutput_debug PRIVATE
 
 set_target_properties(appTimerOutput_debug PROPERTIES 
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/debug)
+
+# RPI using rpi-toolchain.cmake
+add_executable(appTimerOutput_RPI ${SRCFILES})
+target_compile_options(appTimerOutput_RPI PRIVATE
+                      -Wall -Werror -Wextra)
+
+set_target_properties(appTimerOutput_RPI PROPERTIES 
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/RPI)
