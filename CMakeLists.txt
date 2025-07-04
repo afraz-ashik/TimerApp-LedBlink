@@ -1,42 +1,21 @@
 cmake_minimum_required(VERSION 3.10)
-set(CMAKE_C_STANDARD 17)
-set(CMAKE_C_STANDARD_REQUIRED ON)
 
 # Project name
-project(TimerApp C)
+project(TimerAppandLed C)
+include(ExternalProject)
 
-# Directories to include
-include_directories(${CMAKE_SOURCE_DIR} 
-                    ${CMAKE_SOURCE_DIR}/appTimer 
-                    ${CMAKE_SOURCE_DIR}/LedSimulation)
+# for Release and debug
+Externalproject_add(build_gcc
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/build_x86_config
+    CMAKE_ARGS -DCMAKE_C_COMPILER=gcc
+    BUILD_COMMAND $(CMAKE_COMMAND) --build .
+     INSTALL_COMMAND ""
+)
 
-# Source files
-set(SRCFILES main.c 
-             appTimer/appTimer.c 
-             LedSimulation/LedSimulation.c)
-
-# For release folder
-add_executable(appTimerOutput ${SRCFILES})
-
-target_compile_options(appTimerOutput PRIVATE
-                      -Wall -Werror -Wextra)
-
-set_target_properties(appTimerOutput PROPERTIES 
-    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/release)
-
-# For debug folder
-add_executable(appTimerOutput_debug ${SRCFILES})
-
-target_compile_options(appTimerOutput_debug PRIVATE
-                      -Wall -Werror -Wextra -g -O0)
-
-set_target_properties(appTimerOutput_debug PROPERTIES 
-    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/debug)
-
-# RPI using rpi-toolchain.cmake
-add_executable(appTimerOutput_RPI ${SRCFILES})
-target_compile_options(appTimerOutput_RPI PRIVATE
-                      -Wall -Werror -Wextra)
-
-set_target_properties(appTimerOutput_RPI PROPERTIES 
-    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/RPI)
+# for Cross compilation
+Externalproject_add(build_rpi
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/build_arm_config
+    CMAKE_ARGS -DCMAKE_C_COMPILER=aarch64-linux-gnu-gcc
+    BUILD_COMMAND $(CMAKE_COMMAND) --build .
+     INSTALL_COMMAND ""
+)
