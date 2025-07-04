@@ -18,5 +18,5 @@ add_executable(appTimerOutput_RPI ${CMAKE_SOURCE_DIR}/../main.c
 
 target_compile_options(appTimerOutput_RPI PRIVATE
                       -Wall -Werror -Wextra)
-set_target_properties(appTimerOutput_RPI PROPERTIES 
+set_target_properties(appTimerandLedOutput_RPI PROPERTIES 
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/../build/release)

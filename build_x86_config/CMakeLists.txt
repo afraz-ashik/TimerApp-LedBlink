@@ -10,7 +10,7 @@ include_directories(${CMAKE_SOURCE_DIR}/..
 
 
 # For release folder
-add_executable(appTimerOutput ${CMAKE_SOURCE_DIR}/../main.c
+add_executable(appTimerandLedOutput ${CMAKE_SOURCE_DIR}/../main.c
                     ${CMAKE_SOURCE_DIR}/../appTimer/appTimer.c
                     ${CMAKE_SOURCE_DIR}/../LedSimulation/LedSimulation.c)
 
@@ -21,7 +21,7 @@ set_target_properties(appTimerOutput PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/../build/release)
 
 # For debug folder
-add_executable(appTimerOutput_debug ${CMAKE_SOURCE_DIR}/../main.c
+add_executable(appTimerandLedOutput_debug ${CMAKE_SOURCE_DIR}/../main.c
                     ${CMAKE_SOURCE_DIR}/../appTimer/appTimer.c
                     ${CMAKE_SOURCE_DIR}/../LedSimulation/LedSimulation.c)
 
