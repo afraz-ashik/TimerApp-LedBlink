@@ -3,7 +3,7 @@
 // All Rights Reserved
 //*****************************************************************************
 //
-// Summary : Inlcude files declared and forwards decalrations are included
+// Summary : Include files declared, macros & forward declarations are included
 // Note    : None
 //
 //*****************************************************************************
@@ -12,11 +12,15 @@
 
 //******************************* Include Files *******************************
 #include "common.h"
-
+#include "gpiod.h"
 //******************************* Global Types ********************************
 
 //***************************** Global Constants ******************************
-
+#define GPIO_PIN    (22)
+#define ON_TIME     (840000)
+#define OFF_TIME    (532000)
+#define ACTIVE_HIGH (1)
+#define ACTIVE_LOW  (0)
 //***************************** Global Variables ******************************
 
 //**************************** Forward Declarations ***************************

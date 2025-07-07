@@ -5,6 +5,7 @@
 // File    : main.c
 // Summary : Prints current time in GMT, IST and PST timezone.
 //           Infinite printf of "LED ON" "LED OFF" every second.
+//           Blink LED in Raspberrypi if cross-compiled.
 // Note    : None
 // Author  : Afraz Ashik
 // Date    : 18/JUNE/25
@@ -13,7 +14,6 @@
 //******************************* Include Files *******************************
 #include "appTimer.h"
 #include "LedSimulation.h"
-#include <unistd.h>
 
 //******************************* Local Types *********************************
 
@@ -28,6 +28,7 @@
 //******************************.mainFunction.*********************************
 // Purpose : Display time and date in GMT, IST and PST timezone.
 //           Prints "LED ON" "LED OFF" every second.
+//           Set gpio pin to high then low if cross-compiled
 // Inputs  : None.
 // Outputs : None.
 // Return  : Zero.
@@ -83,9 +84,6 @@ int main()
 
         // Print LED Status
         LedSimulationDisplay();
-
-        // Wait one second for refreshing time
-        sleep(1);
     }
 
     return 0;
