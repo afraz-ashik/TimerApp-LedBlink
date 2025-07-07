@@ -12,11 +12,11 @@ include_directories(${CMAKE_SOURCE_DIR}/..
                     ${CMAKE_SOURCE_DIR}/../LedSimulation)
 
 # Cross compilation
-add_executable(appTimerOutput_RPI ${CMAKE_SOURCE_DIR}/../main.c
+add_executable(appTimerandLedOutput_RPI ${CMAKE_SOURCE_DIR}/../main.c
                     ${CMAKE_SOURCE_DIR}/../appTimer/appTimer.c
                     ${CMAKE_SOURCE_DIR}/../LedSimulation/LedSimulation.c)
 
-target_compile_options(appTimerOutput_RPI PRIVATE
+target_compile_options(appTimerandLedOutput_RPI PRIVATE
                       -Wall -Werror -Wextra)
 set_target_properties(appTimerandLedOutput_RPI PROPERTIES 
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/../build/release)

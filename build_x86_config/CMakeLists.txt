@@ -14,10 +14,10 @@ add_executable(appTimerandLedOutput ${CMAKE_SOURCE_DIR}/../main.c
                     ${CMAKE_SOURCE_DIR}/../appTimer/appTimer.c
                     ${CMAKE_SOURCE_DIR}/../LedSimulation/LedSimulation.c)
 
-target_compile_options(appTimerOutput PRIVATE
+target_compile_options(appTimerandLedOutput PRIVATE
                       -Wall -Werror -Wextra)
 
-set_target_properties(appTimerOutput PROPERTIES 
+set_target_properties(appTimerandLedOutput PROPERTIES 
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/../build/release)
 
 # For debug folder
@@ -25,8 +25,8 @@ add_executable(appTimerandLedOutput_debug ${CMAKE_SOURCE_DIR}/../main.c
                     ${CMAKE_SOURCE_DIR}/../appTimer/appTimer.c
                     ${CMAKE_SOURCE_DIR}/../LedSimulation/LedSimulation.c)
 
-target_compile_options(appTimerOutput_debug PRIVATE
+target_compile_options(appTimerandLedOutput_debug PRIVATE
                       -Wall -Werror -Wextra -g -O0)
 
-set_target_properties(appTimerOutput_debug PROPERTIES 
+set_target_properties(appTimerandLedOutput_debug PROPERTIES 
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/../build/debug)
