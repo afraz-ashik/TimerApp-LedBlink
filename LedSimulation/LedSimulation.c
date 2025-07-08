@@ -12,6 +12,7 @@
 
 //******************************* Include Files *******************************
 #include "LedSimulation.h"
+#include "gpiodWrapper.h"
 
 //******************************* Local Types *********************************
 
@@ -31,7 +32,7 @@ static bool gsblLedStatus = false;
 // Inputs  : None.
 // Outputs : None.
 // Return  : true.
-// Notes   : None.
+// Notes   : Functions in gpiodWrapper.c is used if cross-compiled.
 //*****************************************************************************
 bool LedSimulationBlinkLED()
 {
@@ -40,20 +41,17 @@ bool LedSimulationBlinkLED()
 
     // Declare gpiochip number
     struct gpiod_chip *pstChip = NULL;
-    pstChip = gpiod_chip_open_by_name("gpiochip0");
+    pstChip = gpiodWrapperOpenGpioChip();
 
     // Open gpio line
     struct gpiod_line *pstLine = NULL;
-    pstLine = gpiod_chip_get_line(pstChip,GPIO_PIN);
-
-    // Open line for output
-    gpiod_line_request_output(pstLine,"LedBlinkProgram",ACTIVE_LOW);
+    pstLine = gpiodWrapperOpenGpioLine(pstChip);
 
     // if LED is indicated to be OFF
     if (!gsblLedStatus)
     {
         // Set Output to low
-        gpiod_line_set_value(pstLine,ACTIVE_LOW);
+        gpiodWrapperSetGpio(pstLine,ACTIVE_LOW);
         printf("\nLED OFF\n");
         usleep(OFF_TIME);
 
@@ -64,17 +62,14 @@ bool LedSimulationBlinkLED()
     else
     {
         // Set Output to high
-        gpiod_line_set_value(pstLine,ACTIVE_HIGH);
+        gpiodWrapperSetGpio(pstLine,ACTIVE_HIGH);
         printf("\nLED ON\n");
         usleep(ON_TIME);
 
         // Set LED status to indicate OFF
         gsblLedStatus = false;
     }
-
-    // Release the gpio line and close the gpiochip
-    gpiod_line_release(pstLine);
-    gpiod_chip_close(pstChip);
+    gpiodWrapperCloseGpio(pstLine,pstChip);
 
     // If macro RPICODE not defined
     #else

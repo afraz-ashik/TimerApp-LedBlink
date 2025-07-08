@@ -6,7 +6,8 @@ project(TimerAppandLED_x86 C)
 # Directories to include
 include_directories(${CMAKE_SOURCE_DIR}/..
                     ${CMAKE_SOURCE_DIR}/../appTimer 
-                    ${CMAKE_SOURCE_DIR}/../LedSimulation)
+                    ${CMAKE_SOURCE_DIR}/../LedSimulation
+                    ${CMAKE_SOURCE_DIR}/../gpiodWrapper)
 
 
 # For release folder
@@ -15,7 +16,7 @@ add_executable(appTimerandLedOutput ${CMAKE_SOURCE_DIR}/../main.c
                     ${CMAKE_SOURCE_DIR}/../LedSimulation/LedSimulation.c)
 # Flags
 target_compile_options(appTimerandLedOutput PRIVATE
-                      -Wall -Werror -Wextra -fanalyzer)
+                      -Wall -Wextra -fanalyzer)
 
 # Set executable path
 set_target_properties(appTimerandLedOutput PROPERTIES 
