@@ -19,7 +19,7 @@ add_executable(appTimerandLedOutput_RPI ${CMAKE_SOURCE_DIR}/../main.c
                     ${CMAKE_SOURCE_DIR}/../LedSimulation/LedSimulation.c)
 # Flags
 target_compile_options(appTimerandLedOutput_RPI PRIVATE 
-        -Wall -Werror -Wextra -fanalyzer -lgpiod -DRPICODE)
+        -Wall -Werror -Wextra -fanalyzer -DRPICODE)
 
 # Link required libraries
 target_link_libraries(appTimerandLedOutput_RPI PRIVATE 
