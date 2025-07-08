@@ -12,7 +12,6 @@
 
 //******************************* Include Files *******************************
 #include "LedSimulation.h"
-#include "unistd.h"
 
 //******************************* Local Types *********************************
 
@@ -81,7 +80,7 @@ bool LedSimulationBlinkLED()
     LedSimulationDisplay();
     
     #endif
-    
+
     return true;
 }
 
