@@ -54,7 +54,7 @@ bool LedSimulationDisplay()
     if (!sblLedStatus)
     {
         // Set Output High
-        gpiod_line_set_value(pstLine,ACTIVE_HIGH);
+        gpiod_line_set_value(pstLine,ACTIVE_LOW);
         printf("\nLED OFF\n");
         usleep(OFF_TIME);
 
@@ -65,7 +65,7 @@ bool LedSimulationDisplay()
     else
     {
         // Set Output Low
-        gpiod_line_set_value(pstLine,ACTIVE_LOW);
+        gpiod_line_set_value(pstLine,ACTIVE_HIGH);
         printf("\nLED ON\n");
         usleep(ON_TIME);
 
