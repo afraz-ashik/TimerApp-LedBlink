@@ -75,14 +75,14 @@ bool LedSimulationBlinkLED()
     gpiod_line_release(pstLine);
     gpiod_chip_close(pstChip);
 
-    return true;
-
     // If macro not defined
     #else
     
     LedSimulationDisplay();
     
     #endif
+    
+    return true;
 }
 
 //****************************.LedSimulationDisplay.***************************
