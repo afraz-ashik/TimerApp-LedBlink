@@ -27,8 +27,7 @@ static bool gsblLedStatus = false;
 
 //****************************.LedSimulationDisplay.***************************
 // Purpose : If the macro RPICODE is defined then sets gpio pin 22 to high or
-//           low and also prints "LED ON" or "LED OFF".
-//           Else LedSimulationDisplay() is called.
+//           low. Also calls LedSimulationDisplay().
 // Inputs  : None.
 // Outputs : None.
 // Return  : true.
@@ -52,31 +51,18 @@ bool LedSimulationBlinkLED()
     {
         // Set Output to low
         gpiodWrapperSetGpio(pstLine,ACTIVE_LOW);
-        printf("\nLED OFF\n");
-        usleep(OFF_TIME);
-
-        // Set LED status to indicate ON
-        gsblLedStatus = true;
     }
     // if LED is indicated to be ON
     else
     {
         // Set Output to high
         gpiodWrapperSetGpio(pstLine,ACTIVE_HIGH);
-        printf("\nLED ON\n");
-        usleep(ON_TIME);
-
-        // Set LED status to indicate OFF
-        gsblLedStatus = false;
     }
     gpiodWrapperCloseGpio(pstLine,pstChip);
 
-    // If macro RPICODE not defined
-    #else
+    #endif
 
     LedSimulationDisplay();
-
-    #endif
 
     return true;
 }

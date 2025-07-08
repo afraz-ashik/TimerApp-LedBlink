@@ -34,6 +34,7 @@ struct gpiod_chip* gpiodWrapperOpenGpioChip()
     // Declare gpiochip number
     struct gpiod_chip *pstChip = NULL;
     pstChip = gpiod_chip_open_by_name("gpiochip0");
+
     if (!pstChip)
     {
         perror("Open chip failed!");
