@@ -19,25 +19,25 @@
 //***************************** Local Constants *******************************
 
 //***************************** Local Variables *******************************
+static bool gsblLedStatus = false;
 
 //****************************** Local Functions ******************************
 
 //*****************************************************************************
 
 //****************************.LedSimulationDisplay.***************************
-// Purpose : Prints "LED ON" or "LED OFF".
-//           Set gpio pin to high then low if cross-compiled.
+// Purpose : If the macro RPICODE is defined then sets gpio pin 22 to high or
+//           low and also prints "LED ON" or "LED OFF".
+//           Else LedSimulationDisplay() is called.
 // Inputs  : None.
 // Outputs : None.
 // Return  : true.
 // Notes   : None.
 //*****************************************************************************
-bool LedSimulationDisplay()
+bool LedSimulationBlinkLED()
 {
     // If Macro "RPICODE" is defined
     #ifdef RPICODE
-
-    static bool sblLedStatus = false;
 
     // Declare gpiochip number
     struct gpiod_chip *pstChip = NULL;
@@ -51,7 +51,7 @@ bool LedSimulationDisplay()
     gpiod_line_request_output(pstLine,"LedBlinkProgram",ACTIVE_LOW);
 
     // if LED is indicated to be OFF
-    if (!sblLedStatus)
+    if (!gsblLedStatus)
     {
         // Set Output High
         gpiod_line_set_value(pstLine,ACTIVE_LOW);
@@ -59,7 +59,7 @@ bool LedSimulationDisplay()
         usleep(OFF_TIME);
 
         // Set LED status to indicate ON
-        sblLedStatus = true;
+        gsblLedStatus = true;
     }
     // if LED is indicated to be ON
     else
@@ -70,7 +70,7 @@ bool LedSimulationDisplay()
         usleep(ON_TIME);
 
         // Set LED status to indicate OFF
-        sblLedStatus = false;
+        gsblLedStatus = false;
     }
     gpiod_line_release(pstLine);
     gpiod_chip_close(pstChip);
@@ -79,16 +79,30 @@ bool LedSimulationDisplay()
 
     // If macro not defined
     #else
+    
+    LedSimulationDisplay();
+    
+    #endif
+}
 
-    static bool sblLedStatus = false;
+//****************************.LedSimulationDisplay.***************************
+// Purpose : Prints "LED ON" or "LED OFF".
+// Inputs  : None.
+// Outputs : None.
+// Return  : true.
+// Notes   : None.
+//*****************************************************************************
+bool LedSimulationDisplay()
+{
+
     // if LED is indicated to be OFF
-    if (!sblLedStatus)
+    if (!gsblLedStatus)
     {
         printf("\nLED OFF\n");
         usleep(OFF_TIME);
 
         // Set LED status to indicate ON
-        sblLedStatus = true;
+        gsblLedStatus = true;
     }
     // if LED is indicated to be ON
     else
@@ -97,12 +111,9 @@ bool LedSimulationDisplay()
         usleep(ON_TIME);
 
         // Set LED status to indicate OFF
-        sblLedStatus = false;
+        gsblLedStatus = false;
     }
 
     return true;
-
-    #endif
 }
-
 // EOF

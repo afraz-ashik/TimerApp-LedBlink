@@ -28,7 +28,7 @@
 //******************************.mainFunction.*********************************
 // Purpose : Display time and date in GMT, IST and PST timezone.
 //           Prints "LED ON" "LED OFF" every second.
-//           Set gpio pin to high then low if cross-compiled
+//           Set gpio pin to high/low if cross-compiled
 // Inputs  : None.
 // Outputs : None.
 // Return  : Zero.
@@ -82,8 +82,8 @@ int main()
             // Default case
         }
 
-        // Print LED Status
-        LedSimulationDisplay();
+        // Print LED Status and Blink LED if cross compiled
+        LedSimulationBlinkLED();
     }
 
     return 0;
