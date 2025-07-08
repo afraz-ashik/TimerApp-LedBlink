@@ -52,7 +52,7 @@ bool LedSimulationBlinkLED()
     // if LED is indicated to be OFF
     if (!gsblLedStatus)
     {
-        // Set Output High
+        // Set Output to low
         gpiod_line_set_value(pstLine,ACTIVE_LOW);
         printf("\nLED OFF\n");
         usleep(OFF_TIME);
@@ -63,7 +63,7 @@ bool LedSimulationBlinkLED()
     // if LED is indicated to be ON
     else
     {
-        // Set Output Low
+        // Set Output to high
         gpiod_line_set_value(pstLine,ACTIVE_HIGH);
         printf("\nLED ON\n");
         usleep(ON_TIME);
@@ -71,14 +71,16 @@ bool LedSimulationBlinkLED()
         // Set LED status to indicate OFF
         gsblLedStatus = false;
     }
+
+    // Release the gpio line and close the gpiochip
     gpiod_line_release(pstLine);
     gpiod_chip_close(pstChip);
 
-    // If macro not defined
+    // If macro RPICODE not defined
     #else
-    
+
     LedSimulationDisplay();
-    
+
     #endif
 
     return true;

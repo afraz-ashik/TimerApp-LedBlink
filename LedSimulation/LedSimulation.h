@@ -14,6 +14,7 @@
 #include "common.h"
 #include <unistd.h>
 #include <gpiod.h>
+
 //******************************* Global Types ********************************
 
 //***************************** Global Constants ******************************
@@ -22,6 +23,7 @@
 #define OFF_TIME    (532000)
 #define ACTIVE_HIGH (1)
 #define ACTIVE_LOW  (0)
+
 //***************************** Global Variables ******************************
 
 //**************************** Forward Declarations ***************************
