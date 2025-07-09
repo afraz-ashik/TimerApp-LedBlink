@@ -12,10 +12,10 @@ Cross-compilation support for Raspberry Pi (aarch64)
 
 ## Prerequisites
 
-__CMake__ ≥ 3.10
-__Make__
-__GCC__ (for Linux build)
-__aarch64-linux-gnu-gcc__ (for Raspberry Pi cross-compilation)
+__CMake__ ≥ 3.10  
+__Make__  
+__GCC__ (for Linux build)  
+__aarch64-linux-gnu-gcc__ (for Raspberry Pi cross-compilation)  
 
 ## Building with Make
 
