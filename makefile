@@ -1,5 +1,5 @@
 # List of directories for make to search
-VPATH = .:appTimer/:LedSimulation/:release/
+VPATH = .:appTimer/:LedSimulation/:release/:gpiodTools/:Libgpiod/
 
 # Remove folders/files
 RM = rm -f -r
@@ -11,8 +11,12 @@ CC = gcc
 CCRPI = aarch64-linux-gnu-gcc
 
 # Flag that combines warning and include flag
-CFLAGS  = -Wall -Wextra -Werror 
-CFLAGS += -I. -IappTimer -ILedSimulation
+CFLAGS  = -Wall -Wextra -Werror -fanalyzer
+CFLAGS += -I. -IappTimer -ILedSimulation -IgpiodTools
+
+# Link directiories and library
+CRPIFLAG += -ILibgpiod/usr/include -LLibgpiod/usr/lib -lgpiod
+CRPIFLAG += -DRPICODE
 
 #Flag to generate object file
 SRCFLAG = -c
@@ -36,6 +40,9 @@ EXEDIR = -o release/$(@)
 
 # All .c files
 CFILE = $(wildcard *.c appTimer/*.c LedSimulation/*.c)
+
+# Source file with Gpiod related functions
+CGPIODFILE = $(wildcard gpiodTools/*.c)
 
 # Path for .o files
 OBJ  = release/main.o 
@@ -84,7 +91,7 @@ appTimerOutput.exe:
 rpi: makeDir appTimerArm64
 
 appTimerArm64:
-	$(CCRPI) $(CFILE) $(CFLAGS) $(EXEDIR)
+	$(CCRPI) $(CFILE) $(CGPIODFILE) $(CFLAGS) $(CRPIFLAG) $(EXEDIR)
 
 # remove the Generated folders and files
 clean: 

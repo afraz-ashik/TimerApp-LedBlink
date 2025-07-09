@@ -10,7 +10,7 @@ project(TimerAppandLED_ARM C)
 include_directories(${CMAKE_SOURCE_DIR}/..
                     ${CMAKE_SOURCE_DIR}/../appTimer 
                     ${CMAKE_SOURCE_DIR}/../LedSimulation 
-                    ${CMAKE_SOURCE_DIR}/../gpiodWrapper 
+                    ${CMAKE_SOURCE_DIR}/../gpiodTools 
                     ${CMAKE_SOURCE_DIR}/../Libgpiod/usr/lib 
                     ${CMAKE_SOURCE_DIR}/../Libgpiod/usr/include)
 
@@ -18,7 +18,7 @@ include_directories(${CMAKE_SOURCE_DIR}/..
 add_executable(appTimerandLedOutput_RPI ${CMAKE_SOURCE_DIR}/../main.c
                     ${CMAKE_SOURCE_DIR}/../appTimer/appTimer.c
                     ${CMAKE_SOURCE_DIR}/../LedSimulation/LedSimulation.c
-                    ${CMAKE_SOURCE_DIR}/../gpiodWrapper/gpiodWrapper.c )
+                    ${CMAKE_SOURCE_DIR}/../gpiodTools/gpiodTools.c )
 # Flags
 target_compile_options(appTimerandLedOutput_RPI PRIVATE 
         -Wall -Werror -Wextra -fanalyzer -g -DRPICODE)

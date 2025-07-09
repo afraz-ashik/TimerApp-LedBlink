@@ -13,6 +13,7 @@
 //******************************* Include Files *******************************
 #include "common.h"
 #include <unistd.h>
+#include "gpiodTools.h"
 
 //******************************* Global Types ********************************
 
@@ -25,7 +26,7 @@
 //***************************** Global Variables ******************************
 
 //**************************** Forward Declarations ***************************
-bool LedSimulationBlinkLED();
+bool LedSimulationBlinkLED(struct gpiod_line **pstLine);
 bool LedSimulationDisplay();
 
 //*********************** Inline Method Implementations ***********************

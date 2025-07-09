@@ -14,6 +14,7 @@
 //******************************* Include Files *******************************
 #include "appTimer.h"
 #include "LedSimulation.h"
+#include "gpiodTools.h"
 
 //******************************* Local Types *********************************
 
@@ -28,14 +29,32 @@
 //******************************.mainFunction.*********************************
 // Purpose : Display time and date in GMT, IST and PST timezone.
 //           Prints "LED ON" "LED OFF" every second.
-//           Set gpio pin to high/low if cross-compiled
+//           calls function to Set gpio pin to high/low if cross compiled.
 // Inputs  : None.
 // Outputs : None.
 // Return  : Zero.
-// Notes   : Refresh time every second.
+// Notes   : None.
 //*****************************************************************************
 int main()
 {
+    // If the macro is defined intitalize gpio chip
+    #ifdef RPICODE
+
+    // Declare gpiochip number
+    struct gpiod_chip *pstChip = NULL;
+    (void)pstChip;
+
+    // Open gpio line
+    struct gpiod_line *pstLine = NULL;
+    (void)pstLine;
+
+    if(!gpiodToolsGpioInit(&pstLine,&pstChip))
+    {
+        printf("NULL Pointer!");
+    }
+
+    #endif
+
     time_t ulCurrentTime = 0;
 
     while(true)
@@ -82,9 +101,27 @@ int main()
             // Default case
         }
 
-        // Print LED Status and Blink LED if cross compiled
-        LedSimulationBlinkLED();
+        // If macro is defined, Call the function to Blink Led
+        #ifdef RPICODE
+
+        // Print LED Status and Blink LED
+        LedSimulationBlinkLED(&pstLine);
+
+        #endif
+
+        // Only if macro not defined, call the function to print LED status
+        #ifndef RPICODE
+
+        LedSimulationDisplay();
+
+        #endif
     }
+
+    #ifdef RPICODE
+
+    gpiodToolsGpioClose(&pstLine,&pstChip);
+
+    #endif
 
     return 0;
 }

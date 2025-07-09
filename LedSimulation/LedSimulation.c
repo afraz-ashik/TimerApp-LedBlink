@@ -12,7 +12,7 @@
 
 //******************************* Include Files *******************************
 #include "LedSimulation.h"
-#include "gpiodWrapper.h"
+
 
 //******************************* Local Types *********************************
 
@@ -28,47 +28,46 @@ static bool gsblLedStatus = false;
 //****************************.LedSimulationDisplay.***************************
 // Purpose : If the macro RPICODE is defined then sets gpio pin 22 to high or
 //           low. Also calls LedSimulationDisplay().
-// Inputs  : None.
+// Inputs  : pstLine - pointer to GPIO line object.
 // Outputs : None.
 // Return  : true.
-// Notes   : Functions in gpiodWrapper.c is used if cross-compiled.
+// Notes   : None.
 //*****************************************************************************
-bool LedSimulationBlinkLED()
+bool LedSimulationBlinkLED(struct gpiod_line **pstLine)
 {
+    (void)*pstLine;
     // If Macro "RPICODE" is defined
     #ifdef RPICODE
-
-    // Declare gpiochip number
-    struct gpiod_chip *pstChip = NULL;
-    pstChip = gpiodWrapperOpenGpioChip();
-
-    // Open gpio line
-    struct gpiod_line *pstLine = NULL;
-    pstLine = gpiodWrapperOpenGpioLine(pstChip);
 
     // if LED is indicated to be OFF
     if (!gsblLedStatus)
     {
         // Set Output to low
-        gpiodWrapperSetGpio(pstLine,ACTIVE_LOW);
+        if (!gpiodToolsGpioSet(pstLine,ACTIVE_LOW))
+        {
+            printf("Failed to turn LED OFF");
+        }
     }
     // if LED is indicated to be ON
     else
     {
         // Set Output to high
-        gpiodWrapperSetGpio(pstLine,ACTIVE_HIGH);
+        if (!gpiodToolsGpioSet(pstLine,ACTIVE_HIGH))
+        {
+            printf("Failed to turn LED ON");
+        }
     }
-    gpiodWrapperCloseGpio(pstLine,pstChip);
 
     #endif
 
+    //Print LED Status
     LedSimulationDisplay();
 
     return true;
 }
 
 //****************************.LedSimulationDisplay.***************************
-// Purpose : Prints "LED ON" or "LED OFF".
+// Purpose : Prints LED status(ON/OFF).
 // Inputs  : None.
 // Outputs : None.
 // Return  : true.

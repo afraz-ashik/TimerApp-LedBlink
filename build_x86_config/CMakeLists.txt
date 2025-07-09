@@ -7,7 +7,7 @@ project(TimerAppandLED_x86 C)
 include_directories(${CMAKE_SOURCE_DIR}/..
                     ${CMAKE_SOURCE_DIR}/../appTimer 
                     ${CMAKE_SOURCE_DIR}/../LedSimulation
-                    ${CMAKE_SOURCE_DIR}/../gpiodWrapper)
+                    ${CMAKE_SOURCE_DIR}/../gpiodTools)
 
 
 # For release folder

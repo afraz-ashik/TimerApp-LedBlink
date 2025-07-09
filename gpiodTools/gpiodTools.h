@@ -1,4 +1,4 @@
-//******************************* gpiod Wrapper *******************************
+//******************************* gpiod Tools *******************************
 // Copyright (c) 2025 Trenser Technology Solutions
 // All Rights Reserved
 //*****************************************************************************
@@ -7,13 +7,12 @@
 // Note    : None
 //
 //*****************************************************************************
-#ifndef _GPIOD_WRAPPER_H
-#define _GPIOD_WRAPPER_H_
+#ifndef _GPIOD_TOOLS_H_
+#define _GPIOD_TOOLS_H_
 
 //******************************* Include Files *******************************
 #include "common.h"
 #include <gpiod.h>
-#include <stdbool.h>
 
 //******************************* Global Types ********************************
 
@@ -26,14 +25,14 @@
 //***************************** Global Variables ******************************
 
 //**************************** Forward Declarations ***************************
-struct gpiod_chip* gpiodWrapperOpenGpioChip();
-struct gpiod_line* gpiodWrapperOpenGpioLine(struct gpiod_chip *pstChip);
-bool gpiodWrapperSetGpio(struct gpiod_line *pstLine, 
+bool gpiodToolsGpioInit(struct gpiod_line **pstLine, 
+                                              struct gpiod_chip **pstChip);
+bool gpiodToolsGpioSet(struct gpiod_line **pstLine, 
                                         uint16 unLevel);
-bool gpiodWrapperCloseGpio(struct gpiod_line *pstline, 
-                                              struct gpiod_chip *pstChip);
+bool gpiodToolsGpioClose(struct gpiod_line **pstLine, 
+                                              struct gpiod_chip **pstChip);
 
 //*********************** Inline Method Implementations ***********************
 
-#endif // _GPIOD_WRAPPER_H_
+#endif // _GPIOD_Tools_H_
 // EOF
