@@ -107,10 +107,8 @@ int main()
         // Print LED Status and Blink LED
         LedSimulationBlinkLED(&pstLine);
 
-        #endif
-
         // Only if macro not defined, call the function to print LED status
-        #ifndef RPICODE
+        #else
 
         LedSimulationDisplay();
 
