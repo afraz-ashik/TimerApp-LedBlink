@@ -62,7 +62,7 @@ struct gpiod_line* gpiodWrapperOpenGpioLine(struct gpiod_chip *pstChip)
     }
 
     // Open line for output and check request status
-    if (gpiod_line_request_output(pstLine,"LedBlinkProgram",ACTIVE_LOW))
+    if (ZERO > gpiod_line_request_output(pstLine,"LedBlinkProgram",ACTIVE_LOW))
     {
         perror("Output request failed!");
     }
@@ -81,7 +81,7 @@ struct gpiod_line* gpiodWrapperOpenGpioLine(struct gpiod_chip *pstChip)
 void gpiodWrapperSetGpio(struct gpiod_line *pstLine, 
                                         uint16 unLevel)
 {
-    if(gpiod_line_set_value(pstLine,unLevel))
+    if(ZERO > gpiod_line_set_value(pstLine,unLevel))
     {
         perror("Failed to set value!");
     }
