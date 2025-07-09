@@ -15,8 +15,10 @@ CFLAGS  = -Wall -Wextra -Werror -fanalyzer
 CFLAGS += -I. -IappTimer -ILedSimulation -IgpiodTools
 
 # Link directiories and library
-CRPIFLAG += -ILibgpiod/usr/include -LLibgpiod/usr/lib -lgpiod
-CRPIFLAG += -DRPICODE
+LIBFLAGS += -ILibgpiod/usr/include -LLibgpiod/usr/lib -lgpiod
+
+# Define macro for cross compilation
+DFLAG = -DRPICODE
 
 #Flag to generate object file
 SRCFLAG = -c
@@ -91,7 +93,7 @@ appTimerOutput.exe:
 rpi: makeDir appTimerArm64
 
 appTimerArm64:
-	$(CCRPI) $(CFILE) $(CGPIODFILE) $(CFLAGS) $(CRPIFLAG) $(EXEDIR)
+	$(CCRPI) $(CFILE) $(CGPIODFILE) $(CFLAGS) $(LIBFLAGS) $(DFLAG) -g $(EXEDIR)
 
 # remove the Generated folders and files
 clean: 
