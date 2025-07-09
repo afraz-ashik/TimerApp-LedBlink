@@ -13,6 +13,7 @@
 //******************************* Include Files *******************************
 #include "common.h"
 #include <gpiod.h>
+#include <stdbool.h>
 
 //******************************* Global Types ********************************
 
@@ -27,9 +28,9 @@
 //**************************** Forward Declarations ***************************
 struct gpiod_chip* gpiodWrapperOpenGpioChip();
 struct gpiod_line* gpiodWrapperOpenGpioLine(struct gpiod_chip *pstChip);
-void gpiodWrapperSetGpio(struct gpiod_line *pstLine, 
+bool gpiodWrapperSetGpio(struct gpiod_line *pstLine, 
                                         uint16 unLevel);
-void gpiodWrapperCloseGpio(struct gpiod_line *pstline, 
+bool gpiodWrapperCloseGpio(struct gpiod_line *pstline, 
                                               struct gpiod_chip *pstChip);
 
 //*********************** Inline Method Implementations ***********************

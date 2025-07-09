@@ -75,16 +75,18 @@ struct gpiod_line* gpiodWrapperOpenGpioLine(struct gpiod_chip *pstChip)
 // Inputs  : pstLine -  GPIO line object.
 // Inputs  : unLevel - Active High or Active Low.
 // Outputs : Value of GPIO line object changes to High/Low.
-// Return  : None.
+// Return  : True.
 // Notes   : None.
 //*****************************************************************************
-void gpiodWrapperSetGpio(struct gpiod_line *pstLine, 
+bool gpiodWrapperSetGpio(struct gpiod_line *pstLine, 
                                         uint16 unLevel)
 {
     if(ZERO > gpiod_line_set_value(pstLine,unLevel))
     {
         perror("Failed to set value!");
     }
+
+    return true;
 }
 
 //****************************.gpiodWrapperCloseGpio.**************************
@@ -92,15 +94,17 @@ void gpiodWrapperSetGpio(struct gpiod_line *pstLine,
 // Inputs  : pstLine -  GPIO line object.
 // Inputs  : pstChip - Contains opened GPIO chip object.
 // Outputs : None.
-// Return  : None.
+// Return  : True.
 // Notes   : None.
 //*****************************************************************************
-void gpiodWrapperCloseGpio(struct gpiod_line *pstline, 
+bool gpiodWrapperCloseGpio(struct gpiod_line *pstline, 
                                               struct gpiod_chip *pstChip)
 {
     // Release the gpio line
     gpiod_line_release(pstline);
     // Close the gpiochip
     gpiod_chip_close(pstChip);
+
+    return true;
 }
 // EOF
