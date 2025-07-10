@@ -14,7 +14,6 @@
 //******************************* Include Files *******************************
 #include "appTimer.h"
 #include "LedSimulation.h"
-#include "gpiodTools.h"
 
 //******************************* Local Types *********************************
 
@@ -42,11 +41,9 @@ int main()
 
     // Declare gpiochip number
     struct gpiod_chip *pstChip = NULL;
-    (void) pstChip;
 
     // Open gpio line
     struct gpiod_line *pstLine = NULL;
-    (void) pstLine;
 
     if (!gpiodToolsGpioInit(&pstLine,&pstChip))
     {
