@@ -78,7 +78,7 @@ bool gpiodToolsGpioSet(struct gpiod_line **pstLine, uint16 unLevel)
 {
     bool blResult = true;
 
-    if(ZERO > gpiod_line_set_value(*pstLine,unLevel))
+    if (ZERO > gpiod_line_set_value(*pstLine,unLevel))
     {
         perror("Failed to set value!");
         blResult = false;

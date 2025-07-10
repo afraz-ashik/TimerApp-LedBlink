@@ -42,13 +42,13 @@ int main()
 
     // Declare gpiochip number
     struct gpiod_chip *pstChip = NULL;
-    (void)pstChip;
+    (void) pstChip;
 
     // Open gpio line
     struct gpiod_line *pstLine = NULL;
-    (void)pstLine;
+    (void) pstLine;
 
-    if(!gpiodToolsGpioInit(&pstLine,&pstChip))
+    if (!gpiodToolsGpioInit(&pstLine,&pstChip))
     {
         printf("NULL Pointer!");
     }
@@ -57,7 +57,7 @@ int main()
 
     time_t ulCurrentTime = 0;
 
-    while(true)
+    while (true)
     {
         // Move Cursor to top-left and clear screen
         printf("\x1b[H\x1b[J");
@@ -68,7 +68,7 @@ int main()
         printf("\nUTC (0:00)\n");
 
         // GMT time
-        if(AppTimerConvertToTime(ulCurrentTime))
+        if (AppTimerConvertToTime(ulCurrentTime))
         {
             printf("Epoch : %lu\n",ulCurrentTime);
         }
@@ -80,7 +80,7 @@ int main()
         printf("\nIST (+5:30)\n");
 
         // IST time
-        if(!AppTimerConvertToTime(ulCurrentTime + IST_DIFFERENCE))
+        if (!AppTimerConvertToTime(ulCurrentTime + IST_DIFFERENCE))
         {
             printf("\nInvalid Epoch\n");
         }
@@ -92,7 +92,7 @@ int main()
         printf("\nPST (-8:00)\n");
 
         // PST time
-        if(!AppTimerConvertToTime(ulCurrentTime - PST_DIFFERENCE))
+        if (!AppTimerConvertToTime(ulCurrentTime - PST_DIFFERENCE))
         {
             printf("\nInvalid Epoch\n");
         }

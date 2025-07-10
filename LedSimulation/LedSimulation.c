@@ -35,7 +35,7 @@ static bool gsblLedStatus = false;
 //*****************************************************************************
 bool LedSimulationBlinkLED(struct gpiod_line **pstLine)
 {
-    (void)*pstLine;
+    (void) *pstLine;
     // If Macro "RPICODE" is defined
     #ifdef RPICODE
 
