@@ -36,6 +36,9 @@
 //*****************************************************************************
 int main()
 {
+    bool blLedStatus = false;
+    time_t ulCurrentTime = 0;
+
     // If the macro is defined intitalize gpio chip
     #ifdef RPICODE
 
@@ -47,12 +50,10 @@ int main()
 
     if (!gpiodToolsGpioInit(&pstLine,&pstChip))
     {
-        printf("NULL Pointer!");
+        printf("Gpio initiaziation Failed!");
     }
 
     #endif
-
-    time_t ulCurrentTime = 0;
 
     while (true)
     {
@@ -102,12 +103,12 @@ int main()
         #ifdef RPICODE
 
         // Print LED Status and Blink LED
-        LedSimulationBlinkLED(&pstLine);
+        LedSimulationBlinkLED(&pstLine,&blLedStatus);
 
         // Only if macro not defined, call the function to print LED status
         #else
 
-        LedSimulationDisplay();
+        LedSimulationDisplay(&blLedStatus);
 
         #endif
     }

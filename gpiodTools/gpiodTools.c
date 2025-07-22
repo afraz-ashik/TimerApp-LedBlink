@@ -24,63 +24,78 @@
 
 //***************************.gpiodToolsGpioInit.******************************
 // Purpose : To open gpio line of Raspberry Pi.
-// Inputs  : pstLine - pointer to GPIO Line object.
-// Inputs  : pstChip - pointer to GPIO chip object.
+// Inputs  : ppstLine - pointer to GPIO Line object.
+// Inputs  : ppstChip - pointer to GPIO chip object.
 // Outputs : None.
 // Return  : BlResult - false if pass by reference fails, else true.
 // Notes   : None.
 //*****************************************************************************
-bool gpiodToolsGpioInit(struct gpiod_line **pstLine, 
-                                              struct gpiod_chip **pstChip)
+bool gpiodToolsGpioInit(struct gpiod_line **ppstLine, 
+                                              struct gpiod_chip **ppstChip)
 {
     bool blResult = true;
 
-    if (NULL == pstLine || NULL == pstChip)
+    do
     {
-        printf("NULL!");
-        blResult = false;
+
+    if (NULL == ppstLine || NULL == ppstChip)
+    {
+        perror("Passed pointers are NULL!");
+
+        break;
     }
 
     // Define gpiochip number
-    *pstChip = gpiod_chip_open_by_name("gpiochip0");
+    *ppstChip = gpiod_chip_open_by_name("gpiochip0");
 
-    if (!*pstChip)
+    if (NULL == *ppstChip)
     {
         perror("Open chip failed!");
+
+        break;
     }
 
     // Open gpio line
-    *pstLine = gpiod_chip_get_line(*pstChip,GPIO_PIN);
+    *ppstLine = gpiod_chip_get_line(*ppstChip, GPIO_PIN);
 
-    if (!*pstLine)
+    if (NULL == *ppstLine)
     {
         perror("Open gpio line failed!");
+
+        break;
     }
 
     // Open line for output and check request status
-    if (ZERO > gpiod_line_request_output(*pstLine,"Led-Blink-22",ACTIVE_LOW))
+    if (ZERO > gpiod_line_request_output(*ppstLine,"Led-Blink-22", ACTIVE_LOW))
     {
         perror("Output request failed!");
+
+        break;
     }
+
+    blResult = true;
+
+    } while (true != blResult);
 
     return blResult;
 }
 
 //****************************.gpiodToolsSetGpio.******************************
 // Purpose : To Set the GPIO line to High/Low.
-// Inputs  : pstLine - Pointer to GPIO line object.
+// Inputs  : ppstLine - Pointer to GPIO line object.
 // Inputs  : unLevel - Active High or Active Low.
 // Outputs : Value of GPIO line object changes to High/Low.
 // Return  : True.
 // Notes   : None.
 //*****************************************************************************
-bool gpiodToolsGpioSet(struct gpiod_line **pstLine, uint16 unLevel)
+bool gpiodToolsGpioSet(struct gpiod_line **ppstLine, uint16 unLevel)
 {
     bool blResult = true;
 
-    if (ZERO > gpiod_line_set_value(*pstLine,unLevel))
+    if (ZERO > gpiod_line_set_value(*ppstLine, unLevel))
     {
         perror("Failed to set value!");
+
         blResult = false;
     }
 
@@ -89,19 +104,19 @@ bool gpiodToolsGpioSet(struct gpiod_line **pstLine, uint16 unLevel)
 
 //****************************.gpiodToolsCloseGpio.****************************
 // Purpose : To release the gpio line and to close the gpiochip.
-// Inputs  : pstLine - Pointer to GPIO line object.
-// Inputs  : pstChip - Pointer to GPIO chip object.
+// Inputs  : ppstLine - Pointer to GPIO line object.
+// Inputs  : ppstChip - Pointer to GPIO chip object.
 // Outputs : None.
 // Return  : True.
 // Notes   : None.
 //*****************************************************************************
-bool gpiodToolsGpioClose(struct gpiod_line **pstLine, 
-                                              struct gpiod_chip **pstChip)
+bool gpiodToolsGpioClose(struct gpiod_line **ppstLine, 
+                                              struct gpiod_chip **ppstChip)
 {
     // Release the gpio line
-    gpiod_line_release(*pstLine);
+    gpiod_line_release(*ppstLine);
     // Close the gpiochip
-    gpiod_chip_close(*pstChip);
+    gpiod_chip_close(*ppstChip);
 
     return true;
 }

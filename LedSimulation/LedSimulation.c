@@ -19,7 +19,7 @@
 //***************************** Local Constants *******************************
 
 //***************************** Local Variables *******************************
-static bool gsblLedStatus = false;
+
 
 //****************************** Local Functions ******************************
 
@@ -33,17 +33,18 @@ static bool gsblLedStatus = false;
 // Return  : true.
 // Notes   : None.
 //*****************************************************************************
-bool LedSimulationBlinkLED(struct gpiod_line **pstLine)
+bool LedSimulationBlinkLED(struct gpiod_line **ppstLine, bool *pblLedStatus)
 {
-    (void) *pstLine;
+    (void) *ppstLine;
+    
     // If Macro "RPICODE" is defined
     #ifdef RPICODE
 
     // if LED is indicated to be OFF
-    if (!gsblLedStatus)
+    if (!*pblLedStatus)
     {
         // Set Output to low
-        if (!gpiodToolsGpioSet(pstLine,ACTIVE_LOW))
+        if (!gpiodToolsGpioSet(ppstLine, ACTIVE_LOW))
         {
             printf("Failed to turn LED OFF");
         }
@@ -52,7 +53,7 @@ bool LedSimulationBlinkLED(struct gpiod_line **pstLine)
     else
     {
         // Set Output to high
-        if (!gpiodToolsGpioSet(pstLine,ACTIVE_HIGH))
+        if (!gpiodToolsGpioSet(ppstLine, ACTIVE_HIGH))
         {
             printf("Failed to turn LED ON");
         }
@@ -61,7 +62,7 @@ bool LedSimulationBlinkLED(struct gpiod_line **pstLine)
     #endif
 
     //Print LED Status
-    LedSimulationDisplay();
+    LedSimulationDisplay(pblLedStatus);
 
     return true;
 }
@@ -73,26 +74,28 @@ bool LedSimulationBlinkLED(struct gpiod_line **pstLine)
 // Return  : true.
 // Notes   : None.
 //*****************************************************************************
-bool LedSimulationDisplay()
+bool LedSimulationDisplay(bool *pblLedStatus)
 {
 
     // if LED is indicated to be OFF
-    if (!gsblLedStatus)
+    if (true != *pblLedStatus)
     {
         printf("\nLED OFF\n");
+
         usleep(OFF_TIME);
 
         // Set LED status to indicate ON
-        gsblLedStatus = true;
+        *pblLedStatus = true;
     }
     // if LED is indicated to be ON
     else
     {
         printf("\nLED ON\n");
+
         usleep(ON_TIME);
 
         // Set LED status to indicate OFF
-        gsblLedStatus = false;
+        *pblLedStatus = false;
     }
 
     return true;

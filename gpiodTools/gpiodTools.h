@@ -25,12 +25,12 @@
 //***************************** Global Variables ******************************
 
 //**************************** Forward Declarations ***************************
-bool gpiodToolsGpioInit(struct gpiod_line **pstLine, 
-                                              struct gpiod_chip **pstChip);
-bool gpiodToolsGpioSet(struct gpiod_line **pstLine, 
+bool gpiodToolsGpioInit(struct gpiod_line **ppstLine, 
+                                              struct gpiod_chip **ppstChip);
+bool gpiodToolsGpioSet(struct gpiod_line **ppstLine, 
                                         uint16 unLevel);
-bool gpiodToolsGpioClose(struct gpiod_line **pstLine, 
-                                              struct gpiod_chip **pstChip);
+bool gpiodToolsGpioClose(struct gpiod_line **ppstLine, 
+                                              struct gpiod_chip **ppstChip);
 
 //*********************** Inline Method Implementations ***********************
 
