@@ -38,42 +38,42 @@ bool gpiodToolsGpioInit(struct gpiod_line **ppstLine,
     do
     {
 
-    if (NULL == ppstLine || NULL == ppstChip)
-    {
-        perror("Passed pointers are NULL!");
+        if (NULL == ppstLine || NULL == ppstChip)
+        {
+            perror("Passed pointers are NULL!");
 
-        break;
-    }
+            break;
+        }
 
-    // Define gpiochip number
-    *ppstChip = gpiod_chip_open_by_name("gpiochip0");
+        // Define gpiochip number
+        *ppstChip = gpiod_chip_open_by_name("gpiochip0");
 
-    if (NULL == *ppstChip)
-    {
-        perror("Open chip failed!");
+        if (NULL == *ppstChip)
+        {
+            perror("Open chip failed!");
 
-        break;
-    }
+            break;
+        }
 
-    // Open gpio line
-    *ppstLine = gpiod_chip_get_line(*ppstChip, GPIO_PIN);
+        // Open gpio line
+        *ppstLine = gpiod_chip_get_line(*ppstChip, GPIO_PIN);
 
-    if (NULL == *ppstLine)
-    {
-        perror("Open gpio line failed!");
+        if (NULL == *ppstLine)
+        {
+            perror("Open gpio line failed!");
 
-        break;
-    }
+            break;
+        }
 
-    // Open line for output and check request status
-    if (ZERO > gpiod_line_request_output(*ppstLine,"Led-Blink-22", ACTIVE_LOW))
-    {
-        perror("Output request failed!");
+        // Open line for output and check request status
+        if (ZERO > gpiod_line_request_output(*ppstLine,"Led-Blink-22", ACTIVE_LOW))
+        {
+            perror("Output request failed!");
 
-        break;
-    }
+            break;
+        }
 
-    blResult = true;
+        blResult = true;
 
     } while (true != blResult);
 
