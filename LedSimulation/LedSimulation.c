@@ -44,7 +44,7 @@ bool LedSimulationBlinkLED(struct gpiod_line **ppstLine, bool *pblLedStatus)
     if (!*pblLedStatus)
     {
         // Set Output to low
-        if (!gpiodToolsGpioSet(ppstLine, ACTIVE_LOW))
+        if (true != gpiodToolsGpioSet(ppstLine, ACTIVE_LOW))
         {
             printf("Failed to turn LED OFF");
         }
@@ -53,7 +53,7 @@ bool LedSimulationBlinkLED(struct gpiod_line **ppstLine, bool *pblLedStatus)
     else
     {
         // Set Output to high
-        if (!gpiodToolsGpioSet(ppstLine, ACTIVE_HIGH))
+        if (true != gpiodToolsGpioSet(ppstLine, ACTIVE_HIGH))
         {
             printf("Failed to turn LED ON");
         }
