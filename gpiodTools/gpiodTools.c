@@ -37,10 +37,9 @@ bool gpiodToolsGpioInit(struct gpiod_line **ppstLine,
 
     do
     {
-
         if (NULL == ppstLine || NULL == ppstChip)
         {
-            perror("Passed pointers are NULL!");
+            perror("Invalid arguments");
 
             break;
         }
