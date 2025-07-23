@@ -66,7 +66,7 @@ bool gpiodToolsGpioInit(struct gpiod_line **ppstLine,
         }
 
         // Open line for output and check request status
-        if (ZERO > gpiod_line_request_output(*ppstLine,"Led-Blink-22", ACTIVE_LOW))
+        if (ZERO > gpiod_line_request_output(*ppstLine,"Led-22", ACTIVE_LOW))
         {
             perror("Output request failed!");
 

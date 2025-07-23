@@ -26,7 +26,7 @@
 //***************************** Global Variables ******************************
 
 //**************************** Forward Declarations ***************************
-bool LedSimulationBlinkLED(struct gpiod_line **ppstLine, bool *pblLedStatus);
+bool LedSimulationBlinkLED(struct gpiod_line *pstLine, bool *pblLedStatus);
 bool LedSimulationDisplay(bool *pblLedStatus);
 
 //*********************** Inline Method Implementations ***********************

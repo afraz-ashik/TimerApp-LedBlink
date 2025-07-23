@@ -33,10 +33,8 @@
 // Return  : true.
 // Notes   : None.
 //*****************************************************************************
-bool LedSimulationBlinkLED(struct gpiod_line **ppstLine, bool *pblLedStatus)
+bool LedSimulationBlinkLED(struct gpiod_line *pstLine, bool *pblLedStatus)
 {
-    (void) *ppstLine;
-    
     // If Macro "RPICODE" is defined
     #ifdef RPICODE
 
@@ -44,7 +42,7 @@ bool LedSimulationBlinkLED(struct gpiod_line **ppstLine, bool *pblLedStatus)
     if (true != *pblLedStatus)
     {
         // Set Output to low
-        if (true != gpiodToolsGpioSet(ppstLine, ACTIVE_LOW))
+        if (true != gpiodToolsGpioSet(&pstLine, ACTIVE_LOW))
         {
             printf("Failed to turn LED OFF");
         }
@@ -53,11 +51,14 @@ bool LedSimulationBlinkLED(struct gpiod_line **ppstLine, bool *pblLedStatus)
     else
     {
         // Set Output to high
-        if (true != gpiodToolsGpioSet(ppstLine, ACTIVE_HIGH))
+        if (true != gpiodToolsGpioSet(&pstLine, ACTIVE_HIGH))
         {
             printf("Failed to turn LED ON");
         }
     }
+    #else
+
+    (void) pstLine;
 
     #endif
 
