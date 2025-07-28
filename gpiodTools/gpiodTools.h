@@ -1,4 +1,4 @@
-//******************************* Led Simulation ******************************
+//******************************* gpiod Tools *******************************
 // Copyright (c) 2025 Trenser Technology Solutions
 // All Rights Reserved
 //*****************************************************************************
@@ -7,29 +7,32 @@
 // Note    : None
 //
 //*****************************************************************************
-#ifndef _LED_SIMULATION_H_
-#define _LED_SIMULATION_H_
+#ifndef _GPIOD_TOOLS_H_
+#define _GPIOD_TOOLS_H_
 
 //******************************* Include Files *******************************
 #include "common.h"
-#include <unistd.h>
-#include "gpiodTools.h"
+#include <gpiod.h>
 
 //******************************* Global Types ********************************
 
 //***************************** Global Constants ******************************
-#define ON_TIME     (840000)
-#define OFF_TIME    (532000)
 #define ACTIVE_HIGH (1)
 #define ACTIVE_LOW  (0)
+#define GPIO_PIN    (22)
+#define ZERO        (0)
 
 //***************************** Global Variables ******************************
 
 //**************************** Forward Declarations ***************************
-bool LedSimulationBlinkLED(struct gpiod_line *pstLine, bool *pblLedStatus);
-bool LedSimulationDisplay(bool *pblLedStatus);
+bool gpiodToolsGpioInit(struct gpiod_line **ppstLine, 
+                                              struct gpiod_chip **ppstChip);
+bool gpiodToolsGpioSet(struct gpiod_line **ppstLine, 
+                                        uint16 unLevel);
+bool gpiodToolsGpioClose(struct gpiod_line **ppstLine, 
+                                              struct gpiod_chip **ppstChip);
 
 //*********************** Inline Method Implementations ***********************
 
-#endif // _LED_SIMULATION_H_
+#endif // _GPIOD_Tools_H_
 // EOF

@@ -9,14 +9,24 @@ project(TimerAppandLED_ARM C)
 # Directories to include
 include_directories(${CMAKE_SOURCE_DIR}/..
                     ${CMAKE_SOURCE_DIR}/../appTimer 
-                    ${CMAKE_SOURCE_DIR}/../LedSimulation)
+                    ${CMAKE_SOURCE_DIR}/../LedSimulation 
+                    ${CMAKE_SOURCE_DIR}/../gpiodTools 
+                    ${CMAKE_SOURCE_DIR}/../Libgpiod/usr/lib 
+                    ${CMAKE_SOURCE_DIR}/../Libgpiod/usr/include)
 
 # Cross compilation
 add_executable(appTimerandLedOutput_RPI ${CMAKE_SOURCE_DIR}/../main.c
                     ${CMAKE_SOURCE_DIR}/../appTimer/appTimer.c
-                    ${CMAKE_SOURCE_DIR}/../LedSimulation/LedSimulation.c)
+                    ${CMAKE_SOURCE_DIR}/../LedSimulation/LedSimulation.c
+                    ${CMAKE_SOURCE_DIR}/../gpiodTools/gpiodTools.c )
+# Flags
+target_compile_options(appTimerandLedOutput_RPI PRIVATE 
+        -Wall -Werror -Wextra -fanalyzer -g -DRPICODE)
 
-target_compile_options(appTimerandLedOutput_RPI PRIVATE
-                      -Wall -Werror -Wextra)
+# Link required libraries
+target_link_libraries(appTimerandLedOutput_RPI PRIVATE 
+    ${CMAKE_SOURCE_DIR}/../Libgpiod/usr/lib/libgpiod.so)
+
+# Set executable path
 set_target_properties(appTimerandLedOutput_RPI PROPERTIES 
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/../build/release)
