@@ -35,14 +35,14 @@ bool AppTimerConvertToTime(time_t ulEpochTime)
     // Return variable
     bool blResult = true;
 
-    uint16 unMinutes   = 0;
-    uint16 unHours     = 0;
-    uint16 unSeconds   = 0;
+    uint16 unMinutes = 0;
+    uint16 unHours = 0;
+    uint16 unSeconds = 0;
     uint32 ulTotalDays = 0;
-    uint16 unMonth     = 0;
-    uint16 unDay       = 0;
-    uint32 ulYear      = 0;
-    uint16 unIdx       = 0;
+    uint16 unMonth = 0;
+    uint16 unDay = 0;
+    uint32 ulYear = 0;
+    uint16 unIdx = 0;
     
     uint8 ucMeridium[MERIDIUM_SIZE] = "AM";
 
@@ -52,11 +52,11 @@ bool AppTimerConvertToTime(time_t ulEpochTime)
     }
 
     // Storing Current second
-    unSeconds    = ulEpochTime % SECONDS;
+    unSeconds = ulEpochTime % SECONDS;
     ulEpochTime /= SECONDS;
 
     // Storing current Minute
-    unMinutes    = ulEpochTime % SECONDS_IN_A_MINUTE;
+    unMinutes = ulEpochTime % SECONDS_IN_A_MINUTE;
     ulEpochTime /= SECONDS_IN_A_MINUTE;
 
     // Storing Current Hour
@@ -106,11 +106,23 @@ bool AppTimerConvertToTime(time_t ulEpochTime)
 
     for (unIdx = MONTH_START; unIdx <= NUMBER_OF_MONTHS; unIdx++)
     {
-        if (MINIMUM_DAYS_THRESHOLD >= ulTotalDays)
+        // if (MIN_DAYS_IN_A_MONTH >= ulTotalDays)
+        // {
+        //     break;
+        // }
+        if (MIN_DAYS_IN_A_MONTH >= ulTotalDays && FEBRUARY != unIdx)
         {
             break;
         }
 
+        if (FEBRUARY == unIdx && MINIMUM_DAYS_THRESHOLD >= ulTotalDays)
+        {
+            // For leap year
+            ulTotalDays++;
+
+            break;
+        }
+        
         if (FIRST_PART_OF_THE_YEAR >= unIdx)
         {
             // If even subtract 30
