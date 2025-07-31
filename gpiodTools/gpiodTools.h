@@ -19,7 +19,7 @@
 //***************************** Global Constants ******************************
 #define ACTIVE_HIGH (1)
 #define ACTIVE_LOW  (0)
-#define GPIO_PIN    (22)
+#define GPIO_PIN    (5)
 #define ZERO        (0)
 
 //***************************** Global Variables ******************************
